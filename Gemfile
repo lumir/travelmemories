@@ -13,7 +13,8 @@ gem 'omniauth-facebook', "1.4.1"
 gem "omniauth-instagram", "1.0.0"
 gem "devise", "2.1.2"
 gem "fb_graph", "2.5.3"
-
+gem "wicked", "0.2.0"
+gem "aasm", "3.0.5"
 
 # Gems used only for assets and not required
 # in production environments by default.

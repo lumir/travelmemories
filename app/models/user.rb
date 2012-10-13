@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  include AASM
   devise :database_authenticatable, :recoverable, :trackable, :omniauthable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name,
-  :authentications_attributes
+  :authentications_attributes, :status
 
   has_many :authentications, dependent: :destroy
 
@@ -27,6 +28,28 @@ class User < ActiveRecord::Base
   
 
   accepts_nested_attributes_for :authentications, :allow_destroy => true
+
+
+  aasm column: :status do
+    state :completed
+    state :incompleted, initial: true
+
+    event :set_incompleted do
+      transitions to: :incompleted
+    end
+
+    event :set_complete do
+      transitions to: :completed, from: :incompleted
+    end
+
+    event :upgrade do
+      transitions to: :completed, from: :incompleted
+    end
+
+    event :downgrade do
+      transitions to: :incompleted, from: :completed
+    end
+  end
 
   def all_friends
     friends && followers
@@ -62,8 +85,16 @@ class User < ActiveRecord::Base
 
   def albums
     authentication = has_authenticated?("facebook")
-    return FbGraph::User.me(authentication.token).albums if authentication
-    return []
+    if authentication
+      begin
+      album = FbGraph::User.me(authentication.token).albums.detect do |album|
+        album.type == 'profile'
+      end
+      profile_pictures = album.photos
+      rescue
+        []
+      end
+    end
   end
 
   def facebook_friends

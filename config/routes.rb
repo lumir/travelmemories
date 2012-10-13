@@ -8,5 +8,6 @@ Travelmemories::Application.routes.draw do
 
   resources :friendships
 
+  resources :user_steps
 
 end
