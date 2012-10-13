@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121013030415) do
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.boolean  "accepted"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

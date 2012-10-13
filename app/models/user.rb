@@ -21,6 +21,13 @@ class User < ActiveRecord::Base
   has_many :requested_friendships, :class_name => "Friendship",
     :foreign_key => "friend_id", :conditions => "accepted = false"
 
+  has_many :invitations, :dependent => :destroy
+
+
+  def friends_or_pending
+    friends | pending_friends | pending_friends_inverse
+  end
+
   def self.apply_omniauth(auth)
     authentication = Authentication.find_by_uid(auth["uid"])
     if authentication.blank?
@@ -31,6 +38,11 @@ class User < ActiveRecord::Base
       user = authentication.user
     end
     user
+  end
+
+  def get_friendship(user)
+    result = Friendship.where("(user_id = #{user.id} AND friend_id = #{self.id}) OR (user_id = #{self.id} AND friend_id = #{user.id})")    
+    result.first
   end
 
   def albums

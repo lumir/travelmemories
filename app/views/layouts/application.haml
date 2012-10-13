@@ -29,15 +29,27 @@
                 = link_to "Salir", destroy_user_session_path, method: :delete
             - else
               %p.navbar-text.pull-right
-                = link_to "Sign in", omniauth_authorize_path(:user, "foursquare"), class: "fb", rel: "tooltip", title: "Connect with Foursquare"
-    .container-fluid
-      .row-fluid
-        .flash_notices
-          - flash.each do |key, msg|
+                = link_to "Sign in!!!!!!!!!!!!!", omniauth_authorize_path(:user, "foursquare"), class: "fb", rel: "tooltip", title: "Connect with Foursquare"
+    %br
+    %br
+    %br
+    %br
+    %br
+    %br
+    
+    .container
+      #flash_container
+        - flash.each do |key, msg|
+          - if msg && !msg.empty?
             %div{:id => key, :class => "flash #{key}"}
               %span.icon
               %p.message
                 = msg unless msg.is_a?(Array)
+              - if msg.is_a? Array
+                %ul
+                  - msg.map do |m|
+                    %li= m
+              = link_to "x" , "#", :class => "close"
 
 
         = yield

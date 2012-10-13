@@ -10,8 +10,8 @@ gem "haml", "3.1.7"
 gem "omniauth", "1.1.1"
 gem 'omniauth-foursquare', "0.0.8"
 gem 'omniauth-facebook', "1.4.1"
-gem "devise", "2.1.2"
 gem "omniauth-instagram", "1.0.0"
+gem "devise", "2.1.2"
 gem "fb_graph", "2.5.3"
 
 
