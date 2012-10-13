@@ -1,0 +1,41 @@
+= render partial: "shared/steps"
+.container.find_friends
+  .row
+    .spam12
+      .data
+        - unless @users.empty?
+          .pushv3
+            %table.table.table-condensed
+              %thead
+                %tr{colspan: 4}
+                  %th Add friends
+              %tbody
+                - @users.each do |user|
+                  %tr
+                    %td checkbox
+                    %td= image_tag(user.picture(:square), class: "user-photo")
+                    %td.name= user.name
+                    %td add
+
+        - unless @facebook_friends.empty?
+          .pushv3
+            %table.table.table-condensed
+              %thead
+                %tr{colspan: 3}
+                  %th Invite Facebook Friends
+              %tbody
+                - @facebook_friends.each do |user|
+                  %tr
+                    %td checkbox
+                    %td= image_tag(user.picture(:square), class: "user-photo")
+                    %td.name= user.name
+            %button.btn.pull-right.pushv1 Send Invitations
+        - else
+          There are not friend to invite
+
+
+= content_for :javascript do
+  :javascript
+    $(document).ready(function($) {
+      $('.find_friends table').tableScroll({height:350});
+    });

@@ -10,6 +10,9 @@ class UserStepsController < ApplicationController
     case step
     when :friends
       @user.upgrade! if @user.incompleted?
+      @pending_requests = current_user.requested_friendships
+      @users = User.all - current_user.all_friends - current_user.friends_or_pending - [current_user]
+      @facebook_friends = current_user.friends_in_facebook
     end
     render_wizard
   end

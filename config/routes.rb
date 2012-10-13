@@ -8,6 +8,6 @@ Travelmemories::Application.routes.draw do
 
   resources :friendships
 
-  resources :user_steps
+  resources :user_steps, path: "steps"
 
 end

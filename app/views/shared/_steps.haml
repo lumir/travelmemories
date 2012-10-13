@@ -1,6 +1,6 @@
 .container-fluid.steps
   .container
     .row
-      .span4.current Add networks
-      .span4 Find friends
-      .span4 Import places
+      .span4{class: "#{'current' if params[:id] == 'networks'}"} Add networks
+      .span4{class: "#{'current' if params[:id] == 'friends'}"} Find friends
+      .span4{class: "#{'current' if params[:id] == 'places'}"} Import places
