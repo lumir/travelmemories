@@ -1,3 +1,5 @@
+= render partial: "shared/steps"
+
 You have some Checkins in
 %br
 - @places.uniq.each do |location|
@@ -6,10 +8,10 @@ You have some Checkins in
 
 / - @fq_object.items.each do |item_lvl_1|
 /   = item_lvl_1.venue.name
-/   - item_lvl_1.photos.items.each do |photo|  
+/   - item_lvl_1.photos.items.each do |photo|
 /     = image_tag(photo.url)
 
-= render partial: "shared/steps"
+
 .container
   .row
     places
@@ -24,19 +26,14 @@ You have some Checkins in
   .modal-body
     =form_tag user_travels_path(current_user) do
       = text_field_tag :location,"", class: "text", placeholder: "Location"
-      
+
       = text_field_tag :start_date,"", class: "text start_datepicker", placeholder: "Start date"
-      
+
       = text_field_tag :end_date,"", class: "text end_datepicker", placeholder: "End end_date"
-  
+
   .modal-footer
-    =submit_tag "Close", class: "btn close-modal"
-    =submit_tag "Add", class: "btn btn-primary"
-
-
-
-
-
+    = submit_tag "Close", class: "btn close-modal"
+    = submit_tag "Add", class: "btn btn-primary"
 
 :javascript
   $(".open-modal").click(function(){
@@ -47,7 +44,7 @@ You have some Checkins in
     $(".modal").modal("show");
   })
 
-  $(".close-modal").click(function(){  
+  $(".close-modal").click(function(){
     $(".modal").modal("hide")
   })
 
@@ -57,7 +54,7 @@ You have some Checkins in
       var start_date = $(".start_datepicker").val();
       var end_date = dateText;
       if(start_date != ""){
-        var location = $("#location").val()        
+        var location = $("#location").val()
         $.ajax({
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date },
@@ -70,10 +67,10 @@ You have some Checkins in
   });
 
   $('.start_datepicker').datepicker({
-    onSelect: function(dateText, inst){      
+    onSelect: function(dateText, inst){
       var start_date = dateText;
       var end_date = $(".end_datepicker").val();
-      if(end_date != ""){      
+      if(end_date != ""){
         var location = $("#location").val();
         $.ajax({
           url: "/get_checkins",
@@ -82,11 +79,11 @@ You have some Checkins in
             console.log(response)
           }
         });
-      }      
+      }
     }
   });
 
-  
+
 
 
 

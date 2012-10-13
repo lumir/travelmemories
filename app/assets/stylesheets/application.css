@@ -69,7 +69,9 @@
   font-weight: bold;
 }
 #page .steps .span4{padding-top: 75px;}
+#page .steps span{font-size: 14px; display: block; margin-bottom: 7px; font-weight: normal;}
 #page .steps .current{color: #000;}
+#page .steps .current span{font-weight: bold;}
 
 #page .find_friends table{
   border: 1px solid #DDD;
