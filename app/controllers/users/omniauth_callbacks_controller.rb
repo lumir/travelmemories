@@ -4,11 +4,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def method_missing(provider)
     auth = request.env["omniauth.auth"]
     @user = User.from_omniauth(auth, current_user)
-    if auth["provider"] != "foursquare"
-      redirect_to user_step_path(:networks)
-    else
-      sign_in @user
-      redirect_to root_path
+    sign_in @user, bypass: true
+    if @user.authentications.count > 1 && @user.incompleted?
+      @user.upgrade!
+      redirect_to user_step_path("networks") and return
     end
+    after_sign_in_path_for(root_path)and return
   end
 end

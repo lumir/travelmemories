@@ -1,18 +1,20 @@
 class UserStepsController < ApplicationController
   include Wicked::Wizard
   before_filter :authenticate_user!
-  skip_before_filter :user_incompleted
+  skip_before_filter :user_incompleted, only: [:show]
 
   steps :networks, :friends, :places
 
   def show
     @user = current_user
     case step
-    when :friends
-      @user.upgrade! if @user.incompleted?
-      @pending_requests = current_user.requested_friendships
-      @users = User.all - current_user.all_friends - current_user.friends_or_pending - [current_user]
-      @facebook_friends = current_user.friends_in_facebook
+      when :friends
+        user_incompleted
+        @pending_requests = current_user.requested_friendships
+        @users = User.all - current_user.all_friends - current_user.friends_or_pending - [current_user]
+        @facebook_friends = current_user.friends_in_facebook
+      when :places
+        redirect_to user_step_path("networks") and return if @user.incompleted?
     end
     render_wizard
   end
