@@ -1,17 +1,17 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :trackable, :omniauthable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name,
+  :authentications_attributes
 
   has_many :authentications, dependent: :destroy
-
 
   has_many :friendships, :dependent => :destroy
   has_many :inverse_friendships, :class_name => "Friendship",
     :foreign_key => "friend_id", :dependent => :destroy
-  
+
   has_many :friends, :through => :friendships,
-    :conditions => "accepted = true", :source => :friend  
+    :conditions => "accepted = true", :source => :friend
 
   has_many :followers, :through => :friendships,
     :conditions => "accepted = true", :source => :friend, :foreign_key => "friend_id"
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :dependent => :destroy
 
+  accepts_nested_attributes_for :authentications, :allow_destroy => true
 
   def all_friends
     friends && followers
@@ -36,20 +37,22 @@ class User < ActiveRecord::Base
     friends | pending_friends | pending_friends_inverse
   end
 
-  def self.apply_omniauth(auth)
-    authentication = Authentication.find_by_uid(auth["uid"])
-    if authentication.blank?
-      user = User.find_or_create_by_email(auth["info"]["email"], first_name: auth["info"]["first_name"], last_name: auth["info"]["last_name"])
-      authentication = Authentication.new(provider: auth["provider"], uid: auth["uid"], token: auth["credentials"]["token"], secret: auth["credentials"]["secret"], user_id: user.id)
-      authentication.save
-    else
-      user = authentication.user
+  def self.from_omniauth(auth)
+    Authentication.find_by_uid(auth["uid"]).try(:user) || create_from_omniauth(auth)
+  end
+
+  def self.create_from_omniauth(auth)
+    user = find_or_create_by_email(auth["info"]["email"]) do |user|
+      user.first_name = auth["info"]["first_name"]
+      user.last_name = auth["info"]["last_name"]
+      user.password = Devise.friendly_token[0,20]
     end
+    user.authentications.create(provider: auth["provider"], uid: auth["uid"], token: auth["credentials"]["token"], secret: auth["credentials"]["secret"])
     user
   end
 
   def get_friendship(user)
-    result = Friendship.where("(user_id = #{user.id} AND friend_id = #{self.id}) OR (user_id = #{self.id} AND friend_id = #{user.id})")    
+    result = Friendship.where("(user_id = #{user.id} AND friend_id = #{self.id}) OR (user_id = #{self.id} AND friend_id = #{user.id})")
     result.first
   end
 
