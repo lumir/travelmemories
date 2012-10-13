@@ -56,3 +56,16 @@
 .landing #page .intro{ background: url('/assets/map.png') center center; min-height: 330px;}
 .landing .social{ padding-top: 45px;}
 .landing .social .image{text-align: center; height: 90px; line-height: 90px;}
+
+#page .steps{
+  color: #CCC;
+  height: 149px;
+  border-top: 1px solid #E2E2D9;
+  border-bottom: 1px solid #E2E2D9;
+  background: #F3F2EF url('/assets/steps.png') no-repeat center 50px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+#page .steps .span4{padding-top: 75px;}
+#page .steps .current{color: #000;}

@@ -40,9 +40,8 @@ end
 
 namespace :config do
   desc "Configure for rails 3 asset pipeline"
-    task :assets, :roles => :app, :except => {:no_release => true} do
-      run "cd #{release_path} && rake assets:precompile"
-    end
+  task :assets, :roles => :app, :except => {:no_release => true} do
+    run "cd #{release_path} && rake assets:precompile"
   end
 end
 
