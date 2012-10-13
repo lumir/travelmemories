@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     :source => :user
   has_many :requested_friendships, :class_name => "Friendship",
     :foreign_key => "friend_id", :conditions => "accepted = false"
-  
+
 
   accepts_nested_attributes_for :authentications, :allow_destroy => true
 
@@ -64,9 +64,7 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(auth, user = nil)
-    if auth["provider"] == "facebook"
-
-    else
+    unless auth["provider"] == "facebook"
       user = find_or_create_by_email(auth["info"]["email"]) do |user|
         user.first_name = auth["info"]["first_name"]
         user.last_name = auth["info"]["last_name"]
@@ -98,17 +96,17 @@ class User < ActiveRecord::Base
   end
 
   def facebook_friends
-    auth = self.authentications.find_by_provider("facebook")    
+    auth = self.authentications.find_by_provider("facebook")
     subquery = "SELECT uid2 FROM friend WHERE uid1 = #{auth.uid}"
     query = "SELECT uid FROM user WHERE is_app_user=1 and uid IN (#{subquery})"
     friends_application = FbGraph::Query.new(query).fetch("#{auth.token}")
     facebook_friends_ids = friends_application.collect! {|friend| friend["uid"].to_s }
-    users = User.joins(:authentications).where("authentications.uid IN (?)", facebook_friends_ids)    
+    users = User.joins(:authentications).where("authentications.uid IN (?)", facebook_friends_ids)
     users
   end
 
   def friends_in_facebook
-    auth = self.authentications.find_by_provider("facebook")    
+    auth = self.authentications.find_by_provider("facebook")
     user = FbGraph::User.me("#{auth.token}")
     user.friends
   end
