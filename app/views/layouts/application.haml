@@ -1,5 +1,5 @@
 !!!
-%html
+%html{:class => "#{yield :html_class}"}
   %head
     %title
       = yield :title
@@ -10,48 +10,29 @@
     = csrf_meta_tags
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container-fluid
+    #header.navbar
+      .navbar-static-top.navbar-inner
+        .container
           %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{href: "#"} EXAMPLE
+          %a.brand{href: root_path}
           .nav-collapse
             - if user_signed_in?
               %ul.nav
-                %li= link_to "Contactos", root_path
+                %li.active
+                  %a{:href => "#"} Home
                 %li
-                  %form#search.navbar-search{action: "#"}
-                    %input.search-query{name: "q", placeholder: "Buscar...", type: "text"}/
+                  %a{:href => "#"} Link
+                %li
+                  %a{:href => "#"} Link
               %p.navbar-text.pull-right
                 = link_to "Salir", destroy_user_session_path, method: :delete
             - else
               %p.navbar-text.pull-right
-                = link_to "Sign in!!!!!!!!!!!!!", omniauth_authorize_path(:user, "foursquare"), class: "fb", rel: "tooltip", title: "Connect with Foursquare"
-    %br
-    %br
-    %br
-    %br
-    %br
-    %br
-    
-    .container
-      #flash_container
-        - flash.each do |key, msg|
-          - if msg && !msg.empty?
-            %div{:id => key, :class => "flash #{key}"}
-              %span.icon
-              %p.message
-                = msg unless msg.is_a?(Array)
-              - if msg.is_a? Array
-                %ul
-                  - msg.map do |m|
-                    %li= m
-              = link_to "x" , "#", :class => "close"
-
-
-        = yield
+    #page
+      = render partial: "shared/flash"
+      = yield
 
   = yield :javascript

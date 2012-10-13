@@ -9,6 +9,50 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap
- *= require_self 
+ *= require_self
  *= require_tree .
  */
+
+#page{margin-bottom: 50px;}
+#header {border-top:10px solid #ccc;}
+#header .brand{
+  width: 280px;
+  height: 20px;
+  line-height: 77px;
+  background: url('/assets/logo.png') no-repeat center center;
+}
+#header.navbar{margin-bottom: 0 !important;}
+#header .navbar-inner{padding-top: 10px;height:67px; padding-left: 0 !important; padding-right:0 !important;}
+.landing .intro h1 {
+  color: #333;
+  font-size: 40px;
+  line-height: 1.2em;
+  text-align: left;
+  text-shadow: 0 1px white;
+  margin-top: 50px;
+}
+
+.landing .intro p {
+  color: #333;
+  font-size: 18px;
+  line-height: 1.2em;
+  text-align: left;
+  text-shadow: 0 1px white;
+  margin-top: 10px;
+}
+.landing .intro .fq{
+  width: 238px;
+  height: 55px;
+  margin-top: 10px;
+  background: url('/assets/foursquare-login.png') no-repeat 0 0;
+  cursor: pointer;
+  display: inline-block;
+  -moz-transition: none;
+  -webkit-transition: none;
+  transition: none;
+}
+
+
+.landing #page .intro{ background: url('/assets/map.png') center center; min-height: 330px;}
+.landing .social{ padding-top: 45px;}
+.landing .social .image{text-align: center; height: 90px; line-height: 90px;}

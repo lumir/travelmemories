@@ -37,3 +37,13 @@ namespace :deploy do
     task t, :roles => :app do ; end
   end
 end
+
+namespace :config do
+  desc "Configure for rails 3 asset pipeline"
+    task :assets, :roles => :app, :except => {:no_release => true} do
+      run "cd #{release_path} && rake assets:precompile"
+    end
+  end
+end
+
+after 'deploy:update_code', 'config:assets'
