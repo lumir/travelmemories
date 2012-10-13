@@ -1,4 +1,5 @@
-class Authentications < ActiveRecord::Base
+class Authentication < ActiveRecord::Base
+
   # Model attibutes accessibles - Start
   attr_accessible :provider, :secret, :token, :uid, :user_id
   # Model attibutes accessibles - Ends
