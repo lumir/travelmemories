@@ -58,8 +58,16 @@ class User < ActiveRecord::Base
 
   def albums
     authentication = has_authenticated?("facebook")
-    return FbGraph::User.me(authentication.token).albums if authentication
-    return []
+    if authentication
+      begin
+      album = FbGraph::User.me(authentication.token).albums.detect do |album|
+        album.type == 'profile'
+      end
+      profile_pictures = album.photos
+      rescue
+        []
+      end
+    end
   end
 
   def has_authenticated?(provider)
