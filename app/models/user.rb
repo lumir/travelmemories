@@ -55,6 +55,12 @@ class User < ActiveRecord::Base
     friends && followers
   end
 
+  def foursquare_checkins
+    auth = self.authentications.find_by_provider("foursquare")    
+    client = Foursquare2::Client.new(:oauth_token => auth.token)
+    client.user_checkins
+  end
+
   def friends_or_pending
     friends | pending_friends | pending_friends_inverse
   end

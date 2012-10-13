@@ -57,11 +57,17 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    faraday_middleware (0.8.8)
+      faraday (>= 0.7.4, < 0.9)
     fb_graph (2.5.3)
       httpclient (>= 2.2.0.2)
       json
       rack-oauth2 (>= 0.14.4)
       tzinfo
+    foursquare2 (1.8.2)
+      faraday (~> 0.8)
+      faraday_middleware (>= 0.8)
+      hashie (~> 1.0)
     haml (3.1.7)
     hashie (1.2.0)
     highline (1.6.15)
@@ -180,6 +186,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   devise (= 2.1.2)
   fb_graph (= 2.5.3)
+  foursquare2
   haml (= 3.1.7)
   jquery-rails
   omniauth (= 1.1.1)

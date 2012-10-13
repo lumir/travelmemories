@@ -24,7 +24,9 @@
                 %li.active
                   %a{:href => "#"} Home
                 %li
-                  %a{:href => "#"} Link
+                  = link_to "Friendships", new_friendship_path(current_user)
+                  %span
+                    = current_user.pending_friends_inverse.count                  
                 %li
                   %a{:href => "#"} Link
               %p.navbar-text.pull-right
