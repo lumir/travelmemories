@@ -4,5 +4,5 @@ class Friendship < ActiveRecord::Base
 
   validates_uniqueness_of :friend_id, :scope => :user_id
 
-  attr_accessible :user_id, :friend_id, :accepted,
+  attr_accessible :user_id, :friend_id, :accepted
 end
