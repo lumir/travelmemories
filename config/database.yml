@@ -1,0 +1,12 @@
+defaults: &defaults
+  adapter: postgresql
+  template: template0
+
+development:
+  <<: *defaults
+  database: travelmemories_development
+
+test:
+  <<: *defaults
+  min_messages: warning #magic sauce
+  database: travelmemories_test
