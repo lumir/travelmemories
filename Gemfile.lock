@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.0.5)
+      activerecord
     actionmailer (3.2.6)
       actionpack (= 3.2.6)
       mail (~> 2.4.4)
@@ -165,11 +167,15 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
+    wicked (0.2.0)
+      activesupport (>= 3.0.7)
+      rails (>= 3.0.7)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm (= 3.0.5)
   capistrano (= 2.13.4)
   coffee-rails (~> 3.2.1)
   devise (= 2.1.2)
@@ -184,3 +190,4 @@ DEPENDENCIES
   rails (= 3.2.6)
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
+  wicked (= 0.2.0)

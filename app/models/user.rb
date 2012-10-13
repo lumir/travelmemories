@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
+  include AASM
   devise :database_authenticatable, :recoverable, :trackable, :omniauthable
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name,
-  :authentications_attributes
+  :authentications_attributes, :status
 
   has_many :authentications, dependent: :destroy
 
@@ -28,6 +29,28 @@ class User < ActiveRecord::Base
   has_many :invitations, :dependent => :destroy
 
   accepts_nested_attributes_for :authentications, :allow_destroy => true
+
+
+  aasm column: :status do
+    state :completed
+    state :incompleted, initial: true
+
+    event :set_incompleted do
+      transitions to: :incompleted
+    end
+
+    event :set_complete do
+      transitions to: :completed, from: :incompleted
+    end
+
+    event :upgrade do
+      transitions to: :completed, from: :incompleted
+    end
+
+    event :downgrade do
+      transitions to: :incompleted, from: :completed
+    end
+  end
 
   def all_friends
     friends && followers
