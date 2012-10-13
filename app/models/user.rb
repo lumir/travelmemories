@@ -81,16 +81,18 @@ class User < ActiveRecord::Base
     result.first
   end
 
-  def albums
+  def pictures(result=[])
     authentication = has_authenticated?("facebook")
-    if authentication
-      begin
-      album = FbGraph::User.me(authentication.token).albums.detect do |album|
-        album.type == 'profile'
-      end
-      profile_pictures = album.photos
-      rescue
-        []
+    Rails.cache.fetch(:pictures, expires: 1.hour) do
+      result = if authentication
+        begin
+          FbGraph::User.me(authentication.token).albums.inject({}) do |acc, album|
+            acc[album.name] = album.photos.map(&:source)
+            acc
+          end
+        rescue
+          []
+        end
       end
     end
   end
