@@ -2,7 +2,7 @@ class FriendshipsController < ApplicationController
 
   def new
     @pending_requests = current_user.requested_friendships
-    @users = User.all - current_user.friends - current_user.friends_or_pending - [current_user]
+    @users = User.all - current_user.all_friends - current_user.friends_or_pending - [current_user]
   end
 
   def create

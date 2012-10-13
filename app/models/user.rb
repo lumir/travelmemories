@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
   
   has_many :friends, :through => :friendships,
     :conditions => "accepted = true", :source => :friend  
+
+  has_many :followers, :through => :friendships,
+    :conditions => "accepted = true", :source => :friend, :foreign_key => "friend_id"
+
   has_many :pending_friends, :through => :friendships,
     :conditions => "accepted = false", :foreign_key => "friend_id",
     :source => :friend
@@ -23,6 +27,10 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :dependent => :destroy
 
+
+  def all_friends
+    friends && followers
+  end
 
   def friends_or_pending
     friends | pending_friends | pending_friends_inverse
