@@ -2,6 +2,12 @@ defaults: &defaults
   adapter: postgresql
   template: template0
 
+production:
+  <<: *defaults
+  database: travelmemories_production
+  user: travelmemories
+  password: 123QWEasdZXC
+
 development:
   <<: *defaults
   database: travelmemories_development

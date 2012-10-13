@@ -5,6 +5,22 @@ class User < ActiveRecord::Base
 
   has_many :authentications, dependent: :destroy
 
+
+  has_many :friendships, :dependent => :destroy
+  has_many :inverse_friendships, :class_name => "Friendship",
+    :foreign_key => "friend_id", :dependent => :destroy
+  
+  has_many :friends, :through => :friendships,
+    :conditions => "accepted = true", :source => :friend  
+  has_many :pending_friends, :through => :friendships,
+    :conditions => "accepted = false", :foreign_key => "friend_id",
+    :source => :friend
+  has_many :pending_friends_inverse, :through => :inverse_friendships,
+    :conditions => "accepted = false", :foreign_key => "user_id",
+    :source => :user
+  has_many :requested_friendships, :class_name => "Friendship",
+    :foreign_key => "friend_id", :conditions => "accepted = false"
+
   def self.apply_omniauth(auth)
     authentication = Authentication.find_by_uid(auth["uid"])
     if authentication.blank?
