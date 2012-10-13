@@ -1,6 +1,9 @@
 FOURSQUARE_CONFIG = YAML.load_file('config/foursquare.yml')[Rails.env]
 raise "Foursquare configuration at config/foursquare.yml is required for '#{Rails.env}' environment" if FOURSQUARE_CONFIG.nil?
 
+FACEBOOK_CONFIG = YAML.load_file('config/facebook.yml')[Rails.env]
+raise "Facebook configuration at config/facebook.yml is required for '#{Rails.env}' environment" if FACEBOOK_CONFIG.nil?
+
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -206,6 +209,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
+  config.omniauth :facebook, FACEBOOK_CONFIG['token'], FACEBOOK_CONFIG['secret'], {:scope => FACEBOOK_CONFIG['perms']}
   config.omniauth :foursquare, FOURSQUARE_CONFIG['token'], FOURSQUARE_CONFIG['secret']
 
   # ==> Warden configuration

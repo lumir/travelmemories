@@ -6,12 +6,13 @@ gem 'rails', '3.2.6'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-gem "haml"
-gem "omniauth"
-gem 'omniauth-foursquare'
-gem 'omniauth-facebook'
-gem "devise"
-gem "omniauth-instagram"
+gem "haml", "3.1.7"
+gem "omniauth", "1.1.1"
+gem 'omniauth-foursquare', "0.0.8"
+gem 'omniauth-facebook', "1.4.1"
+gem "devise", "2.1.2"
+gem "omniauth-instagram", "1.0.0"
+gem "fb_graph", "2.5.3"
 
 
 # Gems used only for assets and not required

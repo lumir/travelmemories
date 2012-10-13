@@ -7,8 +7,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     flash[:notice] = "User signed in sucessfully"
     redirect_to root_path
   end
-
-  # def failure
-  #   redirect_to root_path, error: "Opps.."
-  # end
 end

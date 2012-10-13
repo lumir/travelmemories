@@ -1,0 +1,9 @@
+development:
+  token: "118982258254817"
+  secret: "71d2bfbaff541f170efbadf62fb74d8a"
+  perms: 'email,offline_access,publish_stream,user_photos'
+
+production:
+  token: "118982258254817"
+  secret: "71d2bfbaff541f170efbadf62fb74d8a"
+  perms: 'email,offline_access,publish_stream,user_photos'

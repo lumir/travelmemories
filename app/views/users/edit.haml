@@ -1,0 +1,6 @@
+
+%br
+%br
+%br
+- unless @user.has_authenticated?("facebook")
+  = link_to "Connect with facebook", omniauth_authorize_path(:user, "facebook"), class: "fb", rel: "tooltip", title: "Connect with Facebook"
