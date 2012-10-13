@@ -1,22 +1,25 @@
+= render partial: "shared/steps"
 
-Pending Request
+.container
+  .row.social
+    %h2 Pending Request
+    - unless @pending_requests.empty?
+      - @pending_requests.each do |friendship|
+        = form_tag friendship_path(friendship.id), method: :put do
+          = friendship.user.first_name
+          = submit_tag "Accept Friendship"
+        = form_tag friendship_path(friendship.id), method: :delete do
+          = submit_tag "Delete Friendship"
+    - else
+      There are not pending requests.
 
-- @pending_requests.each do |friendship|  
-  = form_tag friendship_path(friendship.id), method: :put do    
-    = friendship.user.first_name
-    = submit_tag "Accept Friendship"    
-  = form_tag friendship_path(friendship.id), method: :delete do    
-    = submit_tag "Delete Friendship"
-
-%br
-%br
-%br
-%br
-%br
-
-- @users.each do |user|
-  - unless user.friends.include?(current_user)
-    = user.first_name
-    = form_tag friendships_path do    
-      =hidden_field_tag :user_id, user.id
-      = submit_tag "Add friend"
+    %h2 Add Friends
+    - unless @users.empty?
+      - @users.each do |user|
+        - unless user.friends.include?(current_user)
+          = user.first_name
+          = form_tag friendships_path do
+            =hidden_field_tag :user_id, user.id
+            = submit_tag "Add friend"
+    - else
+      There are not friend to add.
