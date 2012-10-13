@@ -1,1 +1,1 @@
-rvm 1.9.3-p194@travelmemories
+rvm --create use 1.9.3-p194@travelmemories
