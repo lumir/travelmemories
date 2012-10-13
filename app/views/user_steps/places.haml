@@ -1,4 +1,4 @@
-you have some Checkins in
+You have some Checkins in
 %br
 - @places.uniq.each do |location|
   = "- #{location}"
@@ -8,6 +8,11 @@ you have some Checkins in
 /   = item_lvl_1.venue.name
 /   - item_lvl_1.photos.items.each do |photo|  
 /     = image_tag(photo.url)
+
+= render partial: "shared/steps"
+.container
+  .row
+    places
 
 .modal.hide.fade#mymodal{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-header
@@ -27,6 +32,11 @@ you have some Checkins in
   .modal-footer
     =submit_tag "Close", class: "btn close-modal"
     =submit_tag "Add", class: "btn btn-primary"
+
+
+
+
+
 
 :javascript
   $(".open-modal").click(function(){
@@ -77,5 +87,7 @@ you have some Checkins in
   });
 
   
+
+
 
 

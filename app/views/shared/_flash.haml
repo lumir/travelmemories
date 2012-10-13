@@ -1,5 +1,5 @@
-- unless flash.nil?
-  .container
+- unless flash.blank?
+  .container.flash
     .row
       .flash_notices
         - flash.each do |key, msg|

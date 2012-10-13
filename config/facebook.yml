@@ -4,6 +4,6 @@ development:
   perms: 'email,offline_access,publish_stream,user_photos'
 
 production:
-  token: "118982258254817"
-  secret: "71d2bfbaff541f170efbadf62fb74d8a"
+  token: "356669981088976"
+  secret: "2cd63d712d5314d81e7e2547e953767f"
   perms: 'email,offline_access,publish_stream,user_photos'

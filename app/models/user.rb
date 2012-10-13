@@ -61,8 +61,8 @@ class User < ActiveRecord::Base
     if start_date.blank? || end_date.blank?
        result = client.user_checkins
     else
-      res_start_date = DateTime.parse("#{start_date} 00:00:00").to_i
-      res_end_date = DateTime.parse("#{end_date} 00:00:00").to_i
+      res_start_date = DateTime.parse("2012-7-31 01:00:00 ").to_i
+      res_end_date = DateTime.parse("#{end_date} 01:00:00").to_i
       logger.info(start_date)
       logger.info(end_date)
       result = client.user_checkins({afterTimestamp: res_start_date, beforeTimestamp: res_end_date})
@@ -96,16 +96,18 @@ class User < ActiveRecord::Base
     result.first
   end
 
-  def albums
+  def pictures(result=[])
     authentication = has_authenticated?("facebook")
-    if authentication
-      begin
-      album = FbGraph::User.me(authentication.token).albums.detect do |album|
-        album.type == 'profile'
-      end
-      profile_pictures = album.photos
-      rescue
-        []
+    Rails.cache.fetch(:pictures, expires: 1.hour) do
+      result = if authentication
+        begin
+          FbGraph::User.me(authentication.token).albums.inject({}) do |acc, album|
+            acc[album.name] = album.photos.map(&:source)
+            acc
+          end
+        rescue
+          []
+        end
       end
     end
   end
