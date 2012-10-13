@@ -8,10 +8,32 @@ class UserStepsController < ApplicationController
   def show
     @user = current_user
     case step
+    when :places
+      @fq_object = current_user.foursquare_checkins
+      @places = []
+      @fq_object.items.each do |item_lvl_1|
+        @places = ["#{item_lvl_1.venue.location.country},#{item_lvl_1.venue.location.city}"]
+      end
     when :friends
       @user.upgrade! if @user.incompleted?
     end
     render_wizard
+  end
+
+  def get_checkins
+    country = params[:location].split(",").first
+    city = params[:location].split(",").last
+    @checkins = []    
+    current_user.foursquare_checkins(params[:start_date], params[:end_date]).items.each do |item_lvl_1|
+      if item_lvl_1.venue.location.country == country && item_lvl_1.venue.location.city == city
+        @checkins << item_lvl_1
+      end
+    end
+    respond_to do |format|
+      format.js do       
+        render json: @checkins.to_json
+      end
+    end
   end
 
   def update
