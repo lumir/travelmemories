@@ -1,0 +1,16 @@
+<<<<<<< Updated upstream
+%br
+%br
+%br
+- unless @user.has_authenticated?("facebook")
+  = link_to "Connect with facebook", omniauth_authorize_path(:user, "facebook"), class: "fb", rel: "tooltip", title: "Connect with Facebook"
+= form_for @user, url: wizard_path, class: "form-inline" do |f|
+  = f.submit "Submit"
+=======
+= render partial: "shared/steps"
+.container
+  .row
+    = link_to "Connect with facebook", omniauth_authorize_path(:user, "facebook"), class: "fb", rel: "tooltip", title: "Connect with Facebook"
+    = form_for @user, url: wizard_path, class: "form-inline" do |f|
+      = f.submit "Submit"
+>>>>>>> Stashed changes

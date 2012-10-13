@@ -10,6 +10,7 @@
  *
  *= require bootstrap
  *= require_self
+ *= require jquery.tablescroll
  *= require_tree .
  */
 
@@ -69,3 +70,24 @@
 }
 #page .steps .span4{padding-top: 75px;}
 #page .steps .current{color: #000;}
+
+#page .find_friends table{
+  border: 1px solid #DDD;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+}
+#page .find_friends .data{ width: 50%; margin-left: auto; margin-right: auto;}
+#page .find_friends td{ line-height: 50px;}
+.user-photo{
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  height: 50px;
+  width: 50px;
+}
+
+.pushv1{margin-top: 10px;}
+.pushv2{margin-top: 20px;}
+.pushv3{margin-top: 30px;}
+.pushv4{margin-top: 40px;}
+.pushv5{margin-top: 50px;}

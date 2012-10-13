@@ -1,7 +1,5 @@
-= render partial: "shared/steps"
-
 .container
-  .row.social
+  .row
     %h2 Pending Request
     - unless @pending_requests.empty?
       - @pending_requests.each do |friendship|
