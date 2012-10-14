@@ -59,6 +59,10 @@
 .landing .social h3{ font-size: 20px; color:#FFA659;}
 .landing .social .image{text-align: center; height: 90px; line-height: 90px;}
 
+.error body{background: #FFA759 url('/assets/map.png') no-repeat; -moz-background-size: auto 100%; -webkit-background-size: auto 100%; background-size: auto 100%;}
+.error .error404{background: url('/assets/404.png') no-repeat center center;min-height: 500px;}
+.error .error404 span{color:#FFF; position: absolute; left: 48%; top: 235px; font-size: 52px; font-weight: bold;}
+
 #page .steps{
   height: 149px;
   border-top: 1px solid #E2E2D9;
