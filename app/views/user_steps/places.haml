@@ -4,8 +4,11 @@
   .row
     .spam12
       .data
+        .pushv2
+          = link_to "Finish", travels_path, class: "btn pull-right pullv2"
+        .clear
         - unless @places.uniq.empty?
-          .pushv3
+          .pushv2
             %table.table.table-condensed
               %thead
                 %tr
@@ -16,12 +19,11 @@
                   %tr
                     %td= location
                     %td
-                      = link_to "javascript:;", class: "open-modal", :"data-toggle" => "modal", :"data-info" => "#{location}" do
+                      = link_to "#", class: "open-modal", :"data-toggle" => "modal", :"data-info" => "#{location}" do
                         %i.icon-plus
                         Add
         - else
           No Locations found
-
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body

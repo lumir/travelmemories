@@ -97,8 +97,16 @@
 #page .place input.text{margin-left: 35px; display: block;}
 #page .place table{margin-left: 17px;}
 
+.clear{clear: both;}
+
 .pushv1{margin-top: 10px;}
 .pushv2{margin-top: 20px;}
 .pushv3{margin-top: 30px;}
 .pushv4{margin-top: 40px;}
 .pushv5{margin-top: 50px;}
+
+.pullv1{margin-bottom: 10px;}
+.pullv2{margin-bottom: 20px;}
+.pullv3{margin-bottom: 30px;}
+.pullv4{margin-bottom: 40px;}
+.pullv5{margin-bottom: 50px;}
