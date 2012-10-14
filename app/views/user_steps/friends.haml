@@ -14,7 +14,6 @@
                 - @users.each do |user|
                   %tr
                     %td checkbox
-                    %td= image_tag(user.picture(:square), class: "user-photo")
                     %td.name= user.name
                     %td add
         = form_tag invite_friendships_path do
