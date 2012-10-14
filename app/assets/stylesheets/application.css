@@ -33,6 +33,29 @@
   margin-top: 50px;
 }
 
+.btn-facebook{
+  background:#5283B6;
+  border-radius:1px solid #C4C3C7;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  color:#FFF;
+  font-size:16px;
+  text-shadow:0 -1px #597BC0;
+}
+#header .btn-facebook:hover,
+.btn-facebook:hover{
+  background:#6293C6;
+  color:#FFF;
+}
+.btn-facebook .icon-facebook,
+.ribbon .icon-facebook{
+  font-size:22px;
+  margin-right:10px;
+  position:relative;
+  top:2px;
+}
+
 .landing .intro p {
   color: #333;
   font-size: 18px;
@@ -278,3 +301,4 @@ a.hover-white:hover{color:#FFF !important;}
   top:0;
   right:0;
 }
+

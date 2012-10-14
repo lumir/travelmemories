@@ -16,6 +16,8 @@
             .travel-pic
               -unless travel.photos.empty?
                 =image_tag(travel.photos.shuffle.first.url)
+              -else
+                =image_tag("http://travelmemories.dev/assets/airplane.png")
             .travel-body
               .travel-date
                 = travel.start_date
@@ -24,7 +26,7 @@
                   = travel.end_date
               %div
                 %h3.travel-location
-                  = link_to travel.location, show_travel_path(@user,travel), :class => "hover-black"
+                  = link_to travel.location, travel_path(travel), :class => "hover-black"
               %ul.travel-info
                 %li
                   %span.travel-type
@@ -33,8 +35,10 @@
                 %li
                   %a.orange{:href => ""}
                     %i.icon-map-marker
-                    3 Check-ins
+                    = travel.checkins.count
+                    Check-ins
                 %li
                   %a.orange{:href => ""}
                     %i.icon-picture
-                    40 Photos
+                    = travel.photos.count
+                    Photos

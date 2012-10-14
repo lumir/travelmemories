@@ -1,4 +1,4 @@
-.container.find_friends
+.container.find_friends  
   = link_to "Share on Facebook", share_on_facebook_path(:page => timeline_path(current_user.id),view: "timeline")
   .pushv4
     .floatcenter.width400
@@ -20,6 +20,8 @@
             .travel-pic
               -unless travel.photos.empty?
                 =image_tag(travel.photos.shuffle.first.url)
+              -else
+                =image_tag("http://travelmemories.dev/assets/airplane.png")
             .travel-body
               .travel-date
                 = travel.start_date

@@ -38,8 +38,8 @@
       %h3.location Transportation
       = select_tag :transportation, options_for_select([["Car", "car"], ["Airplane", "airplane"],["Bus", "bus"],["Ship", "ship"]]), style: "margin-left:35px"
       %h3.date Add Date
-      = text_field_tag :start_date,"", class: "text span5 start_datepicker", placeholder: "Start date"
-      = text_field_tag :end_date,"", class: "text span5 end_datepicker", placeholder: "End end_date"
+      = text_field_tag :start_date, Date.today, class: "text span5 start_datepicker", placeholder: "Start date"
+      = text_field_tag :end_date, Date.today, class: "text span5 end_datepicker", placeholder: "End date"
       #checkins_container
       %h3.clear.photos Add Photos
       .row-fluid
