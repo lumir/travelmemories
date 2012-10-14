@@ -27,11 +27,10 @@
                   %li= link_to "Log Out", destroy_user_session_path, method: :delete
               - else
                 %p.navbar-text.pull-right
-    .container-fluid
-      .row-fluid
-        .flash_notices
-          =render :partial => "shared/flash", :locals => {:flash => flash}
-        = yield
+    #page
+      .flash_notices
+        =render :partial => "shared/flash", :locals => {:flash => flash}
+      = yield
 
 
   = yield :javascript
