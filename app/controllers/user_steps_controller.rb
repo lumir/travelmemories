@@ -13,8 +13,13 @@ class UserStepsController < ApplicationController
       @fq_object = current_user.foursquare_checkins
       @places = []
       @fq_object.items.each do |item_lvl_1|
+        begin
         @places = ["#{item_lvl_1.venue.location.country},#{item_lvl_1.venue.location.city}"]
+        rescue
+          []
+        end
       end
+      @photos = current_user.pictures
     when :friends
       user_incompleted
         @pending_requests = current_user.requested_friendships

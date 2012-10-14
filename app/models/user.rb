@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_many :requested_friendships, :class_name => "Friendship",
     :foreign_key => "friend_id", :conditions => "accepted = false"
 
-  has_many :travels, :dependent => :destroy
+  has_many :travels, dependent: :destroy
 
   accepts_nested_attributes_for :authentications, :allow_destroy => true
 
@@ -57,22 +57,22 @@ class User < ActiveRecord::Base
   end
 
   def foursquare_checkin(checkin_id)
-    auth = self.authentications.find_by_provider("foursquare")    
+    auth = self.authentications.find_by_provider("foursquare")
     client = Foursquare2::Client.new(:oauth_token => auth.token)
     client.checkin(checkin_id)
   end
 
 
   def foursquare_checkins(start_date = nil, end_date = nil)
-    auth = self.authentications.find_by_provider("foursquare")    
+    auth = self.authentications.find_by_provider("foursquare")
     client = Foursquare2::Client.new(:oauth_token => auth.token)
     if start_date.blank? || end_date.blank?
        result = client.user_checkins
     else
       proc_start = Date.strptime(start_date, "%m/%d/%Y").strftime("%Y-%m-%d")
-      proc_end = Date.strptime(end_date, "%m/%d/%Y").strftime("%Y-%m-%d")      
+      proc_end = Date.strptime(end_date, "%m/%d/%Y").strftime("%Y-%m-%d")
       res_start_date = DateTime.parse("#{proc_start} 01:00:00 ").to_i
-      res_end_date = DateTime.parse("#{proc_end} 01:00:00").to_i      
+      res_end_date = DateTime.parse("#{proc_end} 01:00:00").to_i
       result = client.user_checkins({afterTimestamp: res_start_date, beforeTimestamp: res_end_date})
     end
     result
@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
     Authentication.find_by_uid(auth["uid"]).try(:user) || create_from_omniauth(auth, user)
   end
 
-  def self.create_from_omniauth(auth, user = nil)    
+  def self.create_from_omniauth(auth, user = nil)
     unless auth["provider"] == "facebook"
       user = find_or_create_by_email(auth["info"]["email"]) do |user|
         user.first_name = auth["info"]["first_name"]
