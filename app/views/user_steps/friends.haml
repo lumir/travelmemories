@@ -14,7 +14,7 @@
                 - @users.each do |user|
                   %tr
                     %td checkbox
-                    %td.name= user.name
+                    %td.name= user.first_name
                     %td add
         = form_tag invite_friendships_path do
           - if @facebook_friends.any?
