@@ -16,8 +16,9 @@
       - @users.each do |user|
         - unless user.friends.include?(current_user)
           = user.first_name
-          = form_tag friendships_path do
-            =hidden_field_tag :user_id, user.id
+          = form_for current_user.friendships.build do |f|
+            = f.hidden_field :friend_id, value: user.id
+            = f.hidden_field :accepted, value: false
             = submit_tag "Add friend"
     - else
       There are not friend to add.
