@@ -3,9 +3,10 @@
     .floatcenter.width400
       .media.clearfix.pullv4
         .img.portrait
-          %img{:src => "http://www.facebook.com/photo.php?fbid=10151117890983661&set=a.427954533660.219631.707953660&type=1"}
+          =image_tag(current_user.image_url)
         .body.pushv2
-          %h3 Lumir Olivares
+          %h3
+            = current_user.first_name
 
 
     .aligncenter.pullv4
@@ -14,8 +15,8 @@
     .timeline-container.clearfix
       %ul.travel-timeline.clear
         - @travels.each do |travel|
-          %li.timeline-item.clearfix 
-            .travel-pic  
+          %li.timeline-item.clearfix
+            .travel-pic
               -unless travel.photos.empty?
                 =image_tag(travel.photos.shuffle.first.url)
             .travel-body
@@ -30,7 +31,8 @@
               %ul.travel-info
                 %li
                   %span.travel-type
-                    Travel by Car
+                    Travel by
+                    = travel.try(:transportation)
                 %li
                   %a.orange{:href => ""}
                     %i.icon-map-marker
@@ -39,7 +41,7 @@
                   %a.orange{:href => ""}
                     %i.icon-picture
                     40 Photos
-            
+
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body
@@ -50,8 +52,8 @@
       %h3.location Transportation
       = select_tag :transportation, options_for_select([["Car", "car"], ["Airplane", "airplane"],["Bus", "bus"],["Ship", "ship"]]), style: "margin-left:35px"
       %h3.date Add Date
-      = text_field_tag :start_date,"", class: "text span5 start_datepicker", placeholder: "Start date"
-      = text_field_tag :end_date,"", class: "text span5 end_datepicker", placeholder: "End date"
+      = text_field_tag :start_date, class: "text span5 start_datepicker", placeholder: "Start date"
+      = text_field_tag :end_date, class: "text span5 end_datepicker", placeholder: "End date"
       #checkins_container
       %h3.clear.photos Add Photos
       .row-fluid
@@ -71,7 +73,7 @@
 
 
 :javascript
-  
+
 
   $("#location").keyup(function(){
     var location = $(this).val();

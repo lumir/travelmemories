@@ -3,15 +3,18 @@
     .floatcenter.width400
       .media.clearfix.pullv4
         .img.portrait
-          %img{:src => "http://www.facebook.com/photo.php?fbid=10151117890983661&set=a.427954533660.219631.707953660&type=1"}
+          =image_tag(current_user.image_url)
         .body.pushv2
-          %h3 Lumir Olivares
+          %h3
+            = current_user.first_name
     .timeline-container
       .timeline-item
         %h4.floatcenter.aligncenter.pullv1
           Traveled to
         %h2.floatcenter.aligncenter.pullv1
-          = link_to @travel.location, travel_path(@travel), :class => "orange hover-black"
+          %p.orange.hover-black
+            = @travel.location
+
         %h4.floatcenter.aligncenter
           .pullv1
             On
@@ -27,13 +30,13 @@
           .pullv1
             By
           .f30
-            Land
+            = @travel.try(:transportation)
       .timeline-item.pullv4
         %h4.floatcenter.aligncenter.pullv2
           .pullv1
             Made
           .pullv1.f30
-            3 Check-ins
+            = "#{@travel.checkins.count} Check-ins"
           - @travel.checkins.each do |checkin|
             =checkin.name
       .timeline-item.pullv4
@@ -41,11 +44,11 @@
           .pullv1
             Took
           .pullv1.f30
-            40 Photos
+            = "#{@travel.photos.count} Photos"
         %ul.photo-gallery.clearfix
           - @travel.photos.each do |picture|
-            %li.photo-item.clearfix 
+            %li.photo-item.clearfix
               .img
                 = image_tag(picture.url)
 
-      
+
