@@ -1,4 +1,5 @@
 .container
+  = link_to "Share on Facebook", share_on_facebook_path(:page => show_travel_path(current_user,@travel),view: "show")
   .pushv4
     .floatcenter.width400
       .media.clearfix.pullv4

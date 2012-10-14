@@ -9,6 +9,8 @@ Travelmemories::Application.routes.draw do
   match "/users/:id/timeline", to: "public_pages#timeline", as: :timeline
   match "/users/:user_id/travels/:id", to: "public_pages#show_travel", as: :show_travel
 
+  match "/share_on_facebook", to: "public_pages#share_on_facebook", as: :share_on_facebook
+
   resources :travels, on: :collection do
     resources :checkins
   end

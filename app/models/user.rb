@@ -82,6 +82,20 @@ class User < ActiveRecord::Base
     friends | pending_friends | pending_friends_inverse
   end
 
+  def post_in_facebook_wall(message, link)
+    auth = self.authentications.find_by_provider("facebook")
+    me = FbGraph::User.me(auth.token)
+    if me.permissions.include? :status_update
+      feed_hash = {
+        :message => message,      
+        :picture => "http://travelmemories.dev/assets/airplane.png",        
+        :name => 'TravelMemories',
+        :link => link
+      }    
+      me.feed! feed_hash
+    end
+  end
+
   def self.from_omniauth(auth, user = nil)
     Authentication.find_by_uid(auth["uid"]).try(:user) || create_from_omniauth(auth, user)
   end

@@ -6,7 +6,7 @@
     .row
       .span6.offset6
         %h1 Share & Organize your travel experiences
-        %p Travel Memories is a web app where you can log and share your travel experiences during your trip with your friends back home.
+        %p Travel Memories is a social network to track and share your trips. Simply connect with Facebook and Foursquare to export your check-ins and favourite photos, as well as the friends who shared the experience with you. 
         = link_to "", omniauth_authorize_path(:user, "foursquare"), class: "fq", rel: "tooltip", title: "Connect with Facebook"
 
 .container
@@ -15,23 +15,18 @@
       .image
         = image_tag('airplane.png')
       %h3 Travel around the world
-      %p
-        Ipsum dolor sit amet, consectetur
-        adipisicing elit, sed do eiusmod
-        ut labore et dolore magna aliqua.
+      %p        
+        On a plane, train, bus, yacht or car. Keep travel memories with you while on the go to create a timeline of your favourite moments.
     .span4
       .image
         = image_tag('camera.png')
       %h3 Collect some memories
       %p
-        Ipsum dolor sit amet, consectetur
-        adipisicing elit, sed do eiusmod
-        ut labore et dolore magna aliqua.
+        Export your check-ins and photos to your map and entwine your journeys with those of your friends creating a collection of your top locations to go to. 
+
     .span4
       .image
         = image_tag('network.png')
       %h3 Share with friends
       %p
-        Ipsum dolor sit amet, consectetur
-        adipisicing elit, sed do eiusmod
-        ut labore et dolore magna aliqua.
+        Connect with Facebook and Foursquare. Share your favourite locations with you friends, see where they're going in order to discover new places and future journeys.

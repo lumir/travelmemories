@@ -1,4 +1,5 @@
 .container.find_friends
+  = link_to "Share on Facebook", share_on_facebook_path(:page => timeline_path(current_user.id),view: "timeline")
   .pushv4
     .floatcenter.width400
       .media.clearfix.pullv4
