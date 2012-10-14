@@ -25,15 +25,26 @@ class UserStepsController < ApplicationController
   end
 
   def get_checkins
-    country = params[:location].split(",").first
-    city = params[:location].split(",").last
     @checkins = []
-    current_user.foursquare_checkins(params[:start_date], params[:end_date]).items.each do |item_lvl_1|
-      if item_lvl_1.venue.location.country == country && item_lvl_1.venue.location.city == city
-        @checkins << item_lvl_1
-      end
-    end
-    logger.info(@checkins.inspect)
+    if params[:simple].present?
+      country = params[:location]
+      city = params[:location]
+      current_user.foursquare_checkins(params[:start_date], params[:end_date]).items.each do |item_lvl_1|
+        if item_lvl_1.venue.location.country.downcase.include?(country.downcase) || item_lvl_1.venue.location.city.downcase.include?(city.downcase)
+          @checkins << item_lvl_1
+        end
+      end    
+    else
+      country = params[:location].split(",").first
+      city = params[:location].split(",").last
+      current_user.foursquare_checkins(params[:start_date], params[:end_date]).items.each do |item_lvl_1|
+        if item_lvl_1.venue.location.country == country && item_lvl_1.venue.location.city == city
+          @checkins << item_lvl_1
+        end
+      end    
+    end    
+    
+    
     respond_to do |format|
       format.js do
         render json: @checkins.to_json

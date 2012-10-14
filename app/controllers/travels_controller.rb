@@ -1,5 +1,9 @@
 class TravelsController < ApplicationController
 
+  def index
+    
+  end
+
   def create
     @travel = Travel.new(location: params[:location], start_date: params[:start_date], end_date: params[:end_date], user_id: current_user.id)  
     if @travel.save

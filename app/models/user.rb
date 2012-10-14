@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
     Authentication.find_by_uid(auth["uid"]).try(:user) || create_from_omniauth(auth, user)
   end
 
-  def self.create_from_omniauth(auth, user = nil)
+  def self.create_from_omniauth(auth, user = nil)    
     unless auth["provider"] == "facebook"
       user = find_or_create_by_email(auth["info"]["email"]) do |user|
         user.first_name = auth["info"]["first_name"]
