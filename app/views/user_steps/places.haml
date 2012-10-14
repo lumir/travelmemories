@@ -40,7 +40,9 @@
       %h3.date Add Date
       = text_field_tag :start_date, Date.today, class: "text span5 start_datepicker", placeholder: "Start date"
       = text_field_tag :end_date, Date.today, class: "text span5 end_datepicker", placeholder: "End date"
+
       #checkins_container
+
       %h3.clear.photos Add Photos
       .row-fluid
         .span12
@@ -91,6 +93,7 @@
 
 
   $('.end_datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
     onSelect: function(dateText, inst){
       var start_date = $(".start_datepicker").val();
       var end_date = dateText;
@@ -113,6 +116,7 @@
   });
 
   $('.start_datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
     onSelect: function(dateText, inst){
       var start_date = dateText;
       var end_date = $(".end_datepicker").val();
