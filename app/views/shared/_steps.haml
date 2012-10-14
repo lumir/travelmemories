@@ -1,6 +1,12 @@
 .container-fluid.steps
   .container
     .row
-      .span4{class: "#{'current' if params[:id] == 'networks'}"} Add networks
-      .span4{class: "#{'current' if params[:id] == 'friends'}"} Find friends
-      .span4{class: "#{'current' if params[:id] == 'places'}"} Import places
+      .span4{class: "#{'current' if params[:id] == 'networks'}"}
+        %span Step 1
+        Add networks
+      .span4{class: "#{'current' if params[:id] == 'friends'}"}
+        %span Step 2
+        Find friends
+      .span4{class: "#{'current' if params[:id] == 'places'}"}
+        %span Step 3
+        Import places

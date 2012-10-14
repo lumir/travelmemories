@@ -11,7 +11,11 @@ Travelmemories::Application.routes.draw do
     end
   end
 
-  resources :friendships
+  resources :friendships do
+    collection do
+      post :invite
+    end
+  end
 
   resources :user_steps, path: "steps"
 

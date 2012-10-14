@@ -16,9 +16,9 @@ class FriendshipsController < ApplicationController
   def update
     @friendship = Friendship.find(params[:id])
     if @friendship.update_attribute(:accepted,true)
-      flash[:notice] = "friendship created successfully" 
+      flash[:notice] = "friendship created successfully"
     else
-      flash[:notice] = "friendship cannot be accepted" 
+      flash[:notice] = "friendship cannot be accepted"
     end
     redirect_to :back
   end
@@ -29,6 +29,19 @@ class FriendshipsController < ApplicationController
       flash[:notice] = "A friendship invitation was sent to this friend"
     else
       flash[:error] = "friendship cannot be removed"
+    end
+    redirect_to :back
+  end
+
+  def invite
+    @ids = params[:ids]
+    if @ids.present? and @ids.any?
+      @ids.each do |id|
+        current_user.wall_post(id)
+      end
+      flash[:notice] = "An invitation has been sent."
+    else
+      flash[:error] = "No user found, try picking a user."
     end
     redirect_to :back
   end

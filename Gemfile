@@ -17,6 +17,7 @@ gem "wicked", "0.2.0"
 gem "aasm", "3.0.5"
 gem "foursquare2"
 gem "dalli"
+gem "koala", "1.5.0"
 
 # Gems used only for assets and not required
 # in production environments by default.

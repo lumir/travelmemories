@@ -8,7 +8,6 @@ class UserStepsController < ApplicationController
   def show
     @user = current_user
     case step
-      
     when :places
       redirect_to user_step_path("networks") and return if @user.incompleted?
       @fq_object = current_user.foursquare_checkins
@@ -28,7 +27,7 @@ class UserStepsController < ApplicationController
   def get_checkins
     country = params[:location].split(",").first
     city = params[:location].split(",").last
-    @checkins = []    
+    @checkins = []
     current_user.foursquare_checkins(params[:start_date], params[:end_date]).items.each do |item_lvl_1|
       if item_lvl_1.venue.location.country == country && item_lvl_1.venue.location.city == city
         @checkins << item_lvl_1
@@ -36,7 +35,7 @@ class UserStepsController < ApplicationController
     end
     logger.info(@checkins.inspect)
     respond_to do |format|
-      format.js do       
+      format.js do
         render json: @checkins.to_json
       end
     end
