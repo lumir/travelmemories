@@ -15,3 +15,4 @@
 /tmp
 .powenv
 .DS_Store
+*.orig
