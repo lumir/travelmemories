@@ -113,14 +113,19 @@
 .pushv4{margin-top: 40px;}
 .pushv5{margin-top: 50px;}
 
-.pullv1{margin-bottom: 10px;}
-.pullv2{margin-bottom: 20px;}
-.pullv3{margin-bottom: 30px;}
-.pullv4{margin-bottom: 40px;}
-.pullv5{margin-bottom: 50px;}
+.pullv1{margin-bottom: 10px !important;}
+.pullv2{margin-bottom: 20px !important;}
+.pullv3{margin-bottom: 30px !important;}
+.pullv4{margin-bottom: 40px !important;}
+.pullv5{margin-bottom: 50px !important;}
 
 .alignright{text-align: right;}
 .aligncenter{text-align: center;}
+
+.orange,
+a.hover-orange:hover{color:#FFA759 !important;}
+a.hover-black:hover{color:#000 !important;}
+a.hover-white:hover{color:#FFF !important;}
 
 .travel-pic,
 .portrait{
@@ -178,10 +183,12 @@
 
 .travel-location a{color:#000;}
 
+.travel-info,
 .travel-type{
   color:#999;
   font-size:14px;
   font-style: italic;
+  margin: 0;
 }
 
 .floatcenter{
@@ -201,9 +208,68 @@
   background: #FFA759 !important;
 }
 
-.travel-timeline li{
-  float: left;
-  width:400px;
+.travel-timeline{margin:0;}
+
+.timeline-item{
+  background:#FFF;
+  background:rgba(255,255,255,0.9);
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  list-style: none;
+  width:500px;
+  padding:10px;
+  margin:0 auto 50px;
+}
+.width400{width:400px;}
+
+.timeline-container{
+  background: url(/assets/steps.png) repeat-y top;
+  padding-top:40px;
 }
 
-.width400{width:400px;}
+.travel-info li{
+  float:left;
+  list-style:none;
+  margin-right:10px;
+}
+
+.travel-info a{
+  color:#FFA759;
+}
+
+.f30{font-size: 30px !important;}
+
+.photo-gallery{margin:0; text-align: center;}
+
+.photo-gallery li{
+  display:inline-block;
+  list-style: none;
+  margin:0;
+  padding:0;
+  width:24%;
+}
+
+.photo-gallery li .img{
+  background: #000;
+  border:1px solid #CCC;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:2px;
+  overflow: hidden;
+  margin: 0 10px 20px;
+  height:88px;
+  padding: 5px;
+  position: relative;
+}
+
+.photo-gallery li img{
+  bottom:0;
+  left:0;
+  margin:auto;
+  max-height:100%;
+  max-width: 100%;
+  position: absolute;
+  top:0;
+  right:0;
+}

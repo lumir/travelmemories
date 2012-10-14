@@ -1,10 +1,51 @@
 .container
-  .row
-    %h2= link_to @travel.location, travel_path(@travel)
-    %p
-      = @travel.start_date
-      %br
-      = @travel.end_date
+  .pushv4
+    .floatcenter.width400
+      .media.clearfix.pullv4
+        .img.portrait
+          %img{:src => "http://www.facebook.com/photo.php?fbid=10151117890983661&set=a.427954533660.219631.707953660&type=1"}
+        .body.pushv2
+          %h3 Lumir Olivares
+    .timeline-container
+      .timeline-item
+        %h4.floatcenter.aligncenter.pullv1
+          Traveled to
+        %h2.floatcenter.aligncenter.pullv1
+          = link_to @travel.location, travel_path(@travel), :class => "orange hover-black"
+        %h4.floatcenter.aligncenter
+          .pullv1
+            On
+          .pullv1.f30
+            = @travel.start_date
+          = if @travel.end_date?
+            .pullv1
+              To
+            .pullv1.f30
+              = @travel.end_date
+      .timeline-item.pullv4
+        %h4.floatcenter.aligncenter
+          .pullv1
+            By
+          .f30
+            Land
+      .timeline-item.pullv4
+        %h4.floatcenter.aligncenter.pullv2
+          .pullv1
+            Made
+          .pullv1.f30
+            3 Check-ins
+          - @travel.checkins.each do |checkin|
+            =checkin.name
+      .timeline-item.pullv4
+        %h4.floatcenter.aligncenter.pullv2
+          .pullv1
+            Took
+          .pullv1.f30
+            40 Photos
+        %ul.photo-gallery.clearfix
+          - @travel.photos.each do |picture|
+            %li.photo-item.clearfix 
+              .img
+                = image_tag(picture.url)
 
-    - @travel.photos.each do |picture|
-      = image_tag(picture.url)
+      

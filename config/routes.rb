@@ -9,7 +9,6 @@ Travelmemories::Application.routes.draw do
   match "/users/:id/timeline", to: "public_pages#timeline", as: :timeline
   match "/users/:user_id/travels/:id", to: "public_pages#show_travel", as: :show_travel
 
-
   resources :travels, on: :collection do
     resources :checkins
   end
