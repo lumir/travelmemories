@@ -24,9 +24,21 @@
 
     %h2 Invite friends
     - unless @facebook_friends.empty?
-      - @facebook_friends.each do |user|
-        = image_tag(user.picture)
-        = user.name
-        %br
+      = form_tag invite_friendships_path do
+        - if @facebook_friends.any?
+          .pushv3
+            %table.table.table-condensed
+              %thead
+                %tr
+                  %th{colspan: 3}
+                    Invite Facebook Friends
+                    = submit_tag "Send Invitations", class: "btn pull-right"
+              %tbody
+                - @facebook_friends.each do |user|
+                  %tr{id: user.raw_attributes[:id]}
+                    %td{style: "width: 30px !important; text-align: center" }
+                      = check_box_tag "ids[]", user.raw_attributes[:id]
+                    %td{style: "text-align: center" }= image_tag(user.picture(:square), class: "user-photo")
+                    %td.name= user.name
     - else
       There are not friend to invite
