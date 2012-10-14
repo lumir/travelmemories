@@ -55,16 +55,23 @@ class User < ActiveRecord::Base
     friends && followers
   end
 
+  def foursquare_checkin(checkin_id)
+    auth = self.authentications.find_by_provider("foursquare")    
+    client = Foursquare2::Client.new(:oauth_token => auth.token)
+    client.checkin()
+  end
+
+
   def foursquare_checkins(start_date = nil, end_date = nil)
     auth = self.authentications.find_by_provider("foursquare")    
     client = Foursquare2::Client.new(:oauth_token => auth.token)
     if start_date.blank? || end_date.blank?
        result = client.user_checkins
     else
-      res_start_date = DateTime.parse("2012-7-31 01:00:00 ").to_i
-      res_end_date = DateTime.parse("#{end_date} 01:00:00").to_i
-      logger.info(start_date)
-      logger.info(end_date)
+      proc_start = Date.strptime(start_date, "%m/%d/%Y").strftime("%Y-%m-%d")
+      proc_end = Date.strptime(end_date, "%m/%d/%Y").strftime("%Y-%m-%d")      
+      res_start_date = DateTime.parse("#{proc_start} 01:00:00 ").to_i
+      res_end_date = DateTime.parse("#{proc_end} 01:00:00").to_i      
       result = client.user_checkins({afterTimestamp: res_start_date, beforeTimestamp: res_end_date})
     end
     result

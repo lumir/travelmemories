@@ -22,26 +22,39 @@ You have some Checkins in
       Add Travel in
       %span{id: "travel_location_title"}
   .modal-body
-    =form_tag user_travels_path(current_user) do
+    =form_tag user_travels_path(current_user), id: "submit_travel_form" do
+      = hidden_field_tag :checkins_ids
+
       = text_field_tag :location,"", class: "text", placeholder: "Location"
       
       = text_field_tag :start_date,"", class: "text start_datepicker", placeholder: "Start date"
       
       = text_field_tag :end_date,"", class: "text end_datepicker", placeholder: "End end_date"
   
+    #checkins_container
+
   .modal-footer
     =submit_tag "Close", class: "btn close-modal"
-    =submit_tag "Add", class: "btn btn-primary"
-
-
+    =submit_tag "Add", class: "btn btn-primary", id:"submit_travel_info"
 
 
 
 
 :javascript
+
+  $("#submit_travel_info").click(function(){    
+    var ids = "";
+    var selected_checkins = $(".checkin_checkbox:checked");
+    $.each(selected_checkins, function(index, value) { 
+      ids += $(value).attr("data-id")+","
+    });
+    console.log(ids)
+    $("#checkins_ids").attr("value", ids);
+    $("#submit_travel_form").submit();  
+  });
+  
   $(".open-modal").click(function(){
-    var location = $(this).attr("data-info");
-    console.log(location);
+    var location = $(this).attr("data-info");    
     $("#travel_location_title").html(location);
     $("#location").val(location)
     $(".modal").modal("show");
@@ -61,8 +74,17 @@ You have some Checkins in
         $.ajax({
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date },
-          success: function(response){
-            console.log(response)
+          success: function(response){            
+            my_response = JSON.parse(response)
+            $("#checkins_container").html("");
+            $.each(my_response, function(index, value) { 
+              var checkin_id = value.id
+              var image_icon = value.venue.categories[0].icon
+              var name = value.venue.name
+              var description = value.shout              
+                     
+              $("#checkins_container").prepend("<input class='checkin_checkbox' type='checkbox' data-id='"+checkin_id+"'><img src="+image_icon+"><p>"+name+"</p> <p>"+description+"</p>");
+            });          
           }
         });
       }
@@ -78,8 +100,18 @@ You have some Checkins in
         $.ajax({
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date },
-          success: function(response){
-            console.log(response)
+          success: function(response){  
+            my_response = JSON.parse(response)
+            $("#checkins_container").html("");
+            $.each(my_response, function(index, value) { 
+              var checkin_id = value.id
+              var image_icon = value.venue.categories[0].icon
+              var name = value.venue.name
+              var description = value.shout    
+              console.log(value)          
+              $("#checkins_container").prepend("<input class='checkin_checkbox' type='checkbox' data-id='"+checkin_id+"'><img src="+image_icon+"><p>"+name+"</p> <p>"+description+"</p>")
+            });          
+            
           }
         });
       }      

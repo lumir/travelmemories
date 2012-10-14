@@ -34,6 +34,7 @@ class UserStepsController < ApplicationController
         @checkins << item_lvl_1
       end
     end
+    logger.info(@checkins.inspect)
     respond_to do |format|
       format.js do       
         render json: @checkins.to_json
