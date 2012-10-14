@@ -12,10 +12,13 @@
                   %th Add friends
               %tbody
                 - @users.each do |user|
-                  %tr
-                    %td checkbox
-                    %td.name= user.first_name
-                    %td add
+                  = form_for current_user.friendships.build do |f|
+                    %tr
+                      %td.name{id: user.id}= user.first_name
+                      = f.hidden_field :friend_id, value: user.id
+                      = f.hidden_field :accepted, value: false
+                      %td= f.submit "Add", class: "btn pull-right pushv2"
+
         = form_tag invite_friendships_path do
           - if @facebook_friends.any?
             .pushv3

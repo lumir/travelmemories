@@ -5,9 +5,9 @@
       = yield :title
     /[if lt IE 9]
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    = csrf_meta_tags
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
-    = csrf_meta_tags
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}
   %body
     #header.navbar
@@ -26,7 +26,7 @@
                 %li
                   = link_to "Friendships", new_friendship_path(current_user)
                   %span
-                    = current_user.pending_friends_inverse.count                  
+                    = current_user.pending_friends_inverse.count
                 %li
                   %a{:href => "#"} Link
               %p.navbar-text.pull-right
