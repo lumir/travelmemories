@@ -26,8 +26,8 @@
           No Locations found
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
-  .modal-body
-    = form_tag travels_path, id: "submit_travel_form" do
+  = form_tag travels_path, id: "submit_travel_form" do
+    .modal-body
       = hidden_field_tag :checkins_ids
       %h3.location Add Location
       = text_field_tag :location,"", class: "text span5", placeholder: "Location"
@@ -36,15 +36,19 @@
       = text_field_tag :end_date,"", class: "text span5 end_datepicker", placeholder: "End end_date"
       #checkins_container
       #photos_container
-        - @photos.each do |album|
-          = album.first
-          - album.second.each do |photo|
-            =image_tag photo, size: "100x100"
-            = check_box_tag "photos_urls[]", photo
+        %h3.photos Add Photos
+        .row-fluid
+          .span12
+            - @photos.each do |album|
+              .span12= album.first
+              - album.second.each do |photo|
+                .span4
+                  =image_tag photo, size: "100x100"
+                  = check_box_tag "photos_urls[]", photo
 
-      .modal-footer
-        =submit_tag "Close", class: "btn close-modal"
-        =submit_tag "Add", class: "btn btn-primary", id:"submit_travel_info"
+    .modal-footer
+      = submit_tag "Close", class: "btn close-modal"
+      = submit_tag "Add", class: "btn btn-primary", id:"submit_travel_info"
 
 = render partial: "shared/checkins-template"
 
