@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
 
   def pictures(result=[])
     authentication = has_authenticated?("facebook")
-    Rails.cache.fetch(:pictures, expires: 1.hour) do
+    Rails.cache.fetch([:pictures, id], expires: 1.hour) do
       result = if authentication
         begin
           FbGraph::User.me(authentication.token).albums.inject({}) do |acc, album|
@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
   end
 
   def friends_in_facebook
-    Rails.cache.fetch(:friends_in_facebook, expires: 1.hour) do
+    Rails.cache.fetch([:friends_in_facebook, id],  expires: 1.hour) do
       auth = self.authentications.find_by_provider("facebook")
       user = FbGraph::User.me("#{auth.token}")
       user.friends
