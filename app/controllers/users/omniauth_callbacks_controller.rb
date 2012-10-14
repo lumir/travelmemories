@@ -9,6 +9,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.upgrade!
       redirect_to user_step_path("networks") and return
     end
-    after_sign_in_path_for(user_travels_path(@user))and return
+    after_sign_in_path_for(travels_path) and return
   end
 end

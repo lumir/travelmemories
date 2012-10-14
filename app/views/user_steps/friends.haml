@@ -3,8 +3,9 @@
   .row
     .spam12
       .data
+        .clear
         - unless @users.empty?
-          .pushv3
+          .pushv2
             %table.table.table-condensed
               %thead
                 %tr{colspan: 4}
@@ -21,18 +22,21 @@
             .pushv3
               %table.table.table-condensed
                 %thead
-                  %tr{colspan: 3}
-                    %th Invite Facebook Friends
+                  %tr
+                    %th{colspan: 3}
+                      Invite Facebook Friends
+                      = submit_tag "Send Invitations", class: "btn pull-right"
                 %tbody
                   - @facebook_friends.each do |user|
                     %tr{id: user.raw_attributes[:id]}
-                      %td
+                      %td{style: "width: 30px !important; text-align: center" }
                         = check_box_tag "ids[]", user.raw_attributes[:id]
-                      %td= image_tag(user.picture(:square), class: "user-photo")
+                      %td{style: "text-align: center" }= image_tag(user.picture(:square), class: "user-photo")
                       %td.name= user.name
 
-            .buttons.pushv2
-              = submit_tag "Send Invitations", class: "btn pull-right"
+        .buttons.pushv2
+          = form_for @user, url: wizard_path, class: "form-inline" do |f|
+            = f.submit "Next", class: "btn pull-right pushv2"
 
 
 

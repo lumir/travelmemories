@@ -5,11 +5,11 @@ Travelmemories::Application.routes.draw do
 
   match "/get_checkins", to: "user_steps#get_checkins"
 
-  resources :users, only: [:edit] do
-    resources :travels do
-      resources :checkins
-    end
+  resources :travels, on: :collection do
+    resources :checkins
   end
+
+  resources :users, only: [:edit]
 
   resources :friendships do
     collection do
