@@ -2,6 +2,7 @@ class TravelsController < ApplicationController
 
   def index
     @travels = current_user.travels
+    @photos = current_user.pictures
   end
 
   def show
