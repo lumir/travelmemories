@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
     unless auth["provider"] == "facebook"
       user = find_or_create_by_email(auth["info"]["email"]) do |user|
         user.first_name = auth["info"]["first_name"]
-        user.last_name = auth["info"]["last_name"]        
+        user.last_name = auth["info"]["last_name"]
         user.image_url = auth["info"]["image"]
         user.password = Devise.friendly_token[0,20]
       end
@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   def wall_post(fb_id)
     graph = Koala::Facebook::API.new(has_authenticated?("facebook").token)
     begin
-      graph.put_wall_post("Lorem", {:name => "Travel Memories", :link => "http://railstars.r12.railsrumble.com/"}, fb_id)
+      graph.put_wall_post("Start sharing with your friends all your travels experiences on Travel Memories!", {:name => "Travel Memories", :link => "http://railstars.r12.railsrumble.com/"}, fb_id)
     rescue
     end
   end
