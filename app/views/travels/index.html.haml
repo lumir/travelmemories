@@ -36,11 +36,13 @@
                 %li
                   %a.orange{:href => ""}
                     %i.icon-map-marker
-                    3 Check-ins
+                    = travel.checkins.count
+                    Check-ins
                 %li
                   %a.orange{:href => ""}
                     %i.icon-picture
-                    40 Photos
+                    = travel.photos.count
+                    Photos
 
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
