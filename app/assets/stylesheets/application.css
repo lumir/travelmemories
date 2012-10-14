@@ -22,7 +22,7 @@
   line-height: 77px;
   background: url('/assets/logo.png') no-repeat center center;
 }
-#header.navbar{margin-bottom: 0 !important;}
+#header .navbar{margin-bottom: 0 !important; }
 #header .navbar-inner{padding-top: 10px;height:67px; padding-left: 0 !important; padding-right:0 !important;}
 .landing .intro h1 {
   color: #333;
