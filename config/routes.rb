@@ -3,8 +3,13 @@ Travelmemories::Application.routes.draw do
 
   root to: "pages#index"
 
+  match "/get_checkins", to: "user_steps#get_checkins"
 
-  resources :users, only: [:edit]
+  resources :users, only: [:edit] do
+    resources :travels do
+      resources :checkins
+    end
+  end
 
   resources :friendships do
     collection do

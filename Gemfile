@@ -15,6 +15,7 @@ gem "devise", "2.1.2"
 gem "fb_graph", "2.5.3"
 gem "wicked", "0.2.0"
 gem "aasm", "3.0.5"
+gem "foursquare2"
 gem "dalli"
 gem "koala", "1.5.0"
 
