@@ -5,3 +5,6 @@
       = @travel.start_date
       %br
       = @travel.end_date
+
+    - @travel.photos.each do |picture|
+      = image_tag(picture.url)

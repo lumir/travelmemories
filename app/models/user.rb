@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def all_friends
-    friends && followers
+    friends + followers
   end
 
   def foursquare_checkin(checkin_id)

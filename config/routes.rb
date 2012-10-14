@@ -6,6 +6,8 @@ Travelmemories::Application.routes.draw do
   match "/get_checkins", to: "user_steps#get_checkins"
   match "/get_photos", to: "user_steps#get_photos"
 
+  
+
   resources :travels, on: :collection do
     resources :checkins
   end

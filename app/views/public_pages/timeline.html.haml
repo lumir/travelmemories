@@ -1,0 +1,11 @@
+.container.find_friends
+  .row
+    my Timeline
+
+    - @travels.each do |travel|
+      %h3= travel.location
+      %h4
+        = travel.start_date
+      %h4
+        = travel.end_date
+      =image_tag(travel.photos.shuffle.first.url)

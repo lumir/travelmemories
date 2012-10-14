@@ -1,15 +1,34 @@
 .container.find_friends
-  .row
-    = link_to "Create New Travel","#", class: "open-modal", :"data-toggle" => "modal"
+  .pushv4
+    .floatcenter.width400
+      .media.clearfix.pullv4
+        .img.portrait
+          %img{:src => "http://www.facebook.com/photo.php?fbid=10151117890983661&set=a.427954533660.219631.707953660&type=1"}
+        .body.pushv2
+          %h3 Lumir Olivares
 
-    my Timeline
 
-    - @travels.each do |travel|
-      %h3= link_to travel.location, travel_path(travel)
-      %h4
-        = travel.start_date
-      %h4
-        = travel.end_date
+    .aligncenter.pullv4
+      = link_to "Add New Travel","#", class: "open-modal btn-primary btn btn-orange btn-large", :"data-toggle" => "modal"
+
+    %ul.travel-timeline.clear
+      - @travels.each do |travel|
+        %li.timeline-item
+          -unless travel.photos.empty? 
+            .travel-pic  
+              =image_tag(travel.photos.shuffle.first.url)
+          .travel-body
+            .travel-date
+              = travel.start_date
+              = if travel.end_date
+                %span ,
+                = travel.end_date
+            %div
+              %h3.travel-location
+                = link_to travel.location, travel_path(travel)
+            %span.travel-type
+              Travel by Car
+          
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body
@@ -31,6 +50,9 @@
 
 
 :javascript
+  $(function(){
+    $('.travel-timeline').masonry({itemSelector : '.timeline-item',});
+  });
 
   $("#location").keyup(function(){
     var location = $(this).val();
