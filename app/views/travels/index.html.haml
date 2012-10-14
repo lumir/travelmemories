@@ -117,6 +117,7 @@
 
 
   $('.end_datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
     onSelect: function(dateText, inst){
       var start_date = $(".start_datepicker").val();
       var end_date = dateText;
@@ -136,6 +137,7 @@
   });
 
   $('.start_datepicker').datepicker({
+    dateFormat: "yy-mm-dd",
     onSelect: function(dateText, inst){
       var start_date = dateText;
       var end_date = $(".end_datepicker").val();
