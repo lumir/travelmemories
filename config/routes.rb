@@ -10,7 +10,7 @@ Travelmemories::Application.routes.draw do
     resources :checkins
   end
 
-  resources :users, only: [:edit]
+  resources :users, only: [:edit, :update]
 
   resources :friendships do
     collection do

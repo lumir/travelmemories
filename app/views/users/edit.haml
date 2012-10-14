@@ -1,6 +1,10 @@
-
-%br
-%br
-%br
-- unless @user.has_authenticated?("facebook")
-  = link_to "Connect with facebook", omniauth_authorize_path(:user, "facebook"), class: "fb", rel: "tooltip", title: "Connect with Facebook"
+.container
+  .row
+    %h2 Edit
+    = form_for @user do |f|
+      = f.label :first_name
+      = f.text_field :first_name
+      = f.label :last_name
+      = f.text_field :last_name
+      %br
+      = f.submit "Submit"
