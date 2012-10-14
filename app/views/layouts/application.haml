@@ -22,6 +22,8 @@
                     = link_to  new_friendship_path do
                       %span.badge.badge-warning= current_user.pending_friends_inverse.count
                       Friendships
+
+                  %li= link_to "Friends", friendships_path
                   %li= link_to "Edit Profile", edit_user_path(current_user)
                   %li.divider-vertical
                   %li= link_to "Log Out", destroy_user_session_path, method: :delete
