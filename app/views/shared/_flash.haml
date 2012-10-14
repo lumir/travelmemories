@@ -1,3 +1,9 @@
 - flash.each do |type, message|
   %div.alert-message.fade.in.alert{ "data-alert" => "alert", :class => twitterized_type(type) }
     = message
+
+= content_for :javascript do
+  :javascript
+    setTimeout(function(){
+      $('.flash_notices').fadeOut(400);
+    }, 5000);

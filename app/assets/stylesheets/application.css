@@ -52,7 +52,12 @@
   -webkit-transition: none;
   transition: none;
 }
-
+.flash_notices{
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
+  left: 25%;
+}
 
 .landing #page .intro{ background: url('/assets/map.png') center center; min-height: 330px;}
 .landing .social{ padding-top: 45px; text-align: center; color:#333;}
