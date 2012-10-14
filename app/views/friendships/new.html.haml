@@ -1,29 +1,42 @@
 .container
   .row
-    %h2 Pending Request
+    .pullv4
+    %h3 Pending Requests
     - unless @pending_requests.empty?
       - @pending_requests.each do |friendship|
-        = form_tag friendship_path(friendship.id), method: :put do
-          = friendship.user.first_name
-          = submit_tag "Accept Friendship"
-        = form_tag friendship_path(friendship.id), method: :delete do
-          = submit_tag "Delete Friendship"
+        .media.clearfix.pullv2.pull-left.pushh.width300
+          .img.portrait
+            =image_tag(friendship.user.image_url)
+          .body
+            %h3
+              = friendship.user.first_name
+            .pull-left.pushh
+              = form_tag friendship_path(friendship.id), method: :put do
+                = submit_tag "Accept", :class => "btn btn-primary btn-orange"
+            .pull-left
+              = form_tag friendship_path(friendship.id), method: :delete do
+                = submit_tag "Decline", :class => "btn"
     - else
       There are not pending requests.
 
-    %h2 Add Friends
+    %h3.clear Add Friends
     - unless @users.empty?
       - @users.each do |user|
         - unless user.friends.include?(current_user)
-          = user.first_name
-          = form_for current_user.friendships.build do |f|
-            = f.hidden_field :friend_id, value: user.id
-            = f.hidden_field :accepted, value: false
-            = submit_tag "Add friend"
+          .media.clearfix.pullv2.pull-left.pushh.width300
+            .img.portrait
+              =image_tag(user.image_url)
+            .body
+              %h3
+                = user.first_name
+              = form_for current_user.friendships.build do |f|
+                = f.hidden_field :friend_id, value: user.id
+                = f.hidden_field :accepted, value: false
+                = submit_tag "Add friend", :class => "btn btn-primary btn-orange"
     - else
-      There are not friend to add.
+      There are no friends to add.
 
-    %h2 Invite friends
+    %h3.clear Invite Friends
     - unless @facebook_friends.empty?
       = form_tag invite_friendships_path do
         - if @facebook_friends.any?
@@ -37,9 +50,9 @@
               %tbody
                 - @facebook_friends.each do |user|
                   %tr{id: user.raw_attributes[:id]}
-                    %td{style: "width: 30px !important; text-align: center" }
+                    %td{:width => "30", :class => "aligncenter valign"}
                       = check_box_tag "ids[]", user.raw_attributes[:id]
-                    %td{style: "text-align: center" }= image_tag(user.picture(:square), class: "user-photo")
-                    %td.name= user.name
+                    %td{:width => "50", :class => "aligncenter"}= image_tag(user.picture(:square), class: "user-photo")
+                    %td.name.valign= user.name
     - else
       There are not friend to invite

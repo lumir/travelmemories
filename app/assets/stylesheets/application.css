@@ -120,7 +120,7 @@
 .pullv5{margin-bottom: 50px !important;}
 
 .alignright{text-align: right;}
-.aligncenter{text-align: center;}
+.aligncenter{text-align: center !important;}
 
 .orange,
 a.hover-orange:hover{color:#FFA759 !important;}
@@ -221,6 +221,7 @@ a.hover-white:hover{color:#FFF !important;}
   padding:10px;
   margin:0 auto 50px;
 }
+.width300{width:300px;}
 .width400{width:400px;}
 
 .timeline-container{
@@ -273,3 +274,8 @@ a.hover-white:hover{color:#FFF !important;}
   top:0;
   right:0;
 }
+
+
+.pushh{margin-right:10px;}
+
+.valign{vertical-align:middle !Important;}

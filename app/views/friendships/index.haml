@@ -1,6 +1,11 @@
 .container
+  .pullv4
   .row
-    %h2 Friends
+    %h3 Friends
     - @friends.each do |friend|
-      =# image_tag
-      = friend.first_name
+      .media.clearfix.pullv4.pushh.pull-left.width300
+        .img.portrait
+          =image_tag(friend.image_url)
+        .body.pushv2
+          %h3
+            = friend.first_name
