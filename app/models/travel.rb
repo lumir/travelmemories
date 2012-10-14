@@ -1,6 +1,6 @@
 class Travel < ActiveRecord::Base
 
-  attr_accessible :user_id, :location, :start_date, :end_date, :name
+  attr_accessible :user_id, :location, :start_date, :end_date, :name, :transportation
 
   has_many :checkins
   has_many :photos

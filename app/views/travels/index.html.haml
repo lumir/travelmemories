@@ -17,6 +17,8 @@
       = hidden_field_tag :checkins_ids
       %h3.location Add Location
       = text_field_tag :location,"", class: "text span5", placeholder: "Location", autocomplete: "off"
+      %h3.location Transportation
+      = select_tag :transportation, options_for_select([["Car", "car"], ["Airplane", "airplane"],["Bus", "bus"],["Ship", "ship"]]), style: "margin-left:35px"
       %h3.date Add Date
       = text_field_tag :start_date,"", class: "text span5 start_datepicker", placeholder: "Start date"
       = text_field_tag :end_date,"", class: "text span5 end_datepicker", placeholder: "End date"
