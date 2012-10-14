@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_many :requested_friendships, :class_name => "Friendship",
     :foreign_key => "friend_id", :conditions => "accepted = false"
 
+  has_many :travels, :dependent => :destroy
 
   accepts_nested_attributes_for :authentications, :allow_destroy => true
 

@@ -1,11 +1,11 @@
 class TravelsController < ApplicationController
 
   def index
-    
+    @travels = current_user.travels
   end
 
   def create
-    @travel = Travel.new(location: params[:location], start_date: params[:start_date], end_date: params[:end_date], user_id: current_user.id)  
+    @travel = Travel.new(name: params[:location], location: params[:location], start_date: params[:start_date], end_date: params[:end_date], user_id: current_user.id)  
     if @travel.save
       checkins_ids = params[:checkins_ids].split(",")
       checkins_ids.each do |checkin_id|

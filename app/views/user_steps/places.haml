@@ -25,7 +25,8 @@
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body
-    = form_tag user_travels_path(current_user) do
+    = form_tag user_travels_path(current_user), id: "submit_travel_form" do
+      = hidden_field_tag :checkins_ids
       %h3.location Add Location
       = text_field_tag :location,"", class: "text span5", placeholder: "Location"
       %h3.date Add Date

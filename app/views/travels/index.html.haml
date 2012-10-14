@@ -2,9 +2,18 @@
 
 my Timeline
 
+- @travels.each do |travel|  
+  %h3
+    = travel.location
+  %h4
+    = travel.start_date
+  %h4
+    = travel.end_date
+
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body
-    = form_tag user_travels_path(current_user) do
+    = form_tag user_travels_path(current_user), id: "submit_travel_form" do
+      = hidden_field_tag :checkins_ids
       %h3.location Add Location
       = text_field_tag :location,"", class: "text span5", placeholder: "Location", autocomplete: "off"
       %h3.date Add Date
@@ -38,7 +47,7 @@ my Timeline
     });
   })
 
-  $("#submit_travel_info").click(function(){    
+  $("#submit_travel_info").click(function(){        
     var ids = "";
     var selected_checkins = $(".checkin_checkbox:checked");
     $.each(selected_checkins, function(index, value) { 
@@ -68,7 +77,7 @@ my Timeline
         var location = $("#location").val()
         $.ajax({
           url: "/get_checkins",
-          data: { location: location, start_date: start_date, end_date: end_date },
+          data: { location: location, start_date: start_date, end_date: end_date, simple: "true" },
           success: function(response){
             console.log(JSON.parse(response))
             var data = ich.checkins_template({data: JSON.parse(response)});
@@ -87,7 +96,7 @@ my Timeline
         var location = $("#location").val();
         $.ajax({
           url: "/get_checkins",
-          data: { location: location, start_date: start_date, end_date: end_date },
+          data: { location: location, start_date: start_date, end_date: end_date, simple: "true" },
           success: function(response){            
             if(response != "[]"){
               var data = ich.checkins_template({data: JSON.parse(response)});
