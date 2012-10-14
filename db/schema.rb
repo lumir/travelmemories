@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121014070028) do
+ActiveRecord::Schema.define(:version => 20121014160314) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20121014070028) do
     t.string   "last_name"
     t.string   "nickname"
     t.string   "status",                 :default => "incompleted"
+    t.string   "image_url"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
