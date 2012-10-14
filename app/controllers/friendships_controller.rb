@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @friendship = Friendship.new(user_id: current_user.id, friend_id: params[:user_id], accepted: false)
+    @friendship = current_user.friendships.build(params[:friendship])
     @friendship.save
     flash[:notice] = "A friendship invitation was sent to this friend"
     redirect_to :back

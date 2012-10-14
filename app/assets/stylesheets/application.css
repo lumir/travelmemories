@@ -96,6 +96,8 @@
 #page .place h3.photos{background: url('/assets/icons/photos.png') no-repeat left center;}
 #page .place input.text{margin-left: 35px; display: block;}
 #page .place table{margin-left: 17px;}
+#page .place form{margin: 0 !important;}
+#page .place form .span4{height: 90px;}
 
 .clear{clear: both;}
 

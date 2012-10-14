@@ -1,18 +1,19 @@
-= link_to "Create New Travel","#", class: "open-modal", :"data-toggle" => "modal"
+.container.find_friends
+  .row
+    = link_to "Create New Travel","#", class: "open-modal", :"data-toggle" => "modal"
 
-my Timeline
+    my Timeline
 
-- @travels.each do |travel|  
-  %h3
-    = travel.location
-  %h4
-    = travel.start_date
-  %h4
-    = travel.end_date
+    - @travels.each do |travel|
+      %h3= link_to travel.location, travel_path(travel)
+      %h4
+        = travel.start_date
+      %h4
+        = travel.end_date
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body
-    = form_tag user_travels_path(current_user), id: "submit_travel_form" do
+    = form_tag travels_path, id: "submit_travel_form" do
       = hidden_field_tag :checkins_ids
       %h3.location Add Location
       = text_field_tag :location,"", class: "text span5", placeholder: "Location", autocomplete: "off"
@@ -30,7 +31,7 @@ my Timeline
 
 
 :javascript
-  
+
   $("#location").keyup(function(){
     var location = $(this).val();
     $.ajax({
@@ -42,23 +43,23 @@ my Timeline
           $("#checkins_container").html(data);
         }else{
           $("#checkins_container").html("");
-        }               
+        }
       }
     });
   })
 
-  $("#submit_travel_info").click(function(){        
+  $("#submit_travel_info").click(function(){
     var ids = "";
     var selected_checkins = $(".checkin_checkbox:checked");
-    $.each(selected_checkins, function(index, value) { 
+    $.each(selected_checkins, function(index, value) {
       ids += $(value).attr("data-id")+","
-    });    
+    });
     $("#checkins_ids").attr("value", ids);
-    $("#submit_travel_form").submit();  
+    $("#submit_travel_form").submit();
   });
-  
+
   $(".open-modal").click(function(){
-    var location = $(this).attr("data-info");    
+    var location = $(this).attr("data-info");
     $("#travel_location_title").html(location);
     $("#location").val(location)
     $(".modal").modal("show");
@@ -97,14 +98,14 @@ my Timeline
         $.ajax({
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date, simple: "true" },
-          success: function(response){            
+          success: function(response){
             if(response != "[]"){
               var data = ich.checkins_template({data: JSON.parse(response)});
               $("#checkins_container").html(data);
             }else{
               $("#checkins_container").html("");
-            }               
-          } 
+            }
+          }
         });
       }
     }
