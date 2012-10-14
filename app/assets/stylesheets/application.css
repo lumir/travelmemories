@@ -73,7 +73,7 @@
 #page .steps .current{color: #000;}
 #page .steps .current span{font-weight: bold;}
 
-#page .find_friends table{
+#page .find_friends table, #page .place table{
   border: 1px solid #DDD;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -87,6 +87,15 @@
   height: 50px;
   width: 50px;
 }
+
+#page .place h2{font-size: 20px; font-weight: bold; padding-left: 8px;}
+#page .place h3{font-size: 18px; font-weight: bold;padding-left: 40px;}
+#page .place h3.location{background: url('/assets/icons/location.png') no-repeat left center; }
+#page .place h3.date{background: url('/assets/icons/date.png') no-repeat left center;}
+#page .place h3.check-ins{background: url('/assets/icons/checkin.png') no-repeat 7px 5px;}
+#page .place h3.photos{background: url('/assets/icons/photos.png') no-repeat left center;}
+#page .place input.text{margin-left: 35px; display: block;}
+#page .place table{margin-left: 17px;}
 
 .pushv1{margin-top: 10px;}
 .pushv2{margin-top: 20px;}
