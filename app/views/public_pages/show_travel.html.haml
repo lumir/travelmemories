@@ -1,0 +1,7 @@
+.container
+  .row
+    %h2= link_to @travel.location, travel_path(@travel)
+    %p
+      = @travel.start_date
+      %br
+      = @travel.end_date

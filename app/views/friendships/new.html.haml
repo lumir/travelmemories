@@ -16,17 +16,30 @@
       - @users.each do |user|
         - unless user.friends.include?(current_user)
           = user.first_name
-          = form_tag friendships_path do
-            =hidden_field_tag :user_id, user.id
+          = form_for current_user.friendships.build do |f|
+            = f.hidden_field :friend_id, value: user.id
+            = f.hidden_field :accepted, value: false
             = submit_tag "Add friend"
     - else
       There are not friend to add.
 
     %h2 Invite friends
     - unless @facebook_friends.empty?
-      - @facebook_friends.each do |user|
-        = image_tag(user.picture)
-        = user.name
-        %br
+      = form_tag invite_friendships_path do
+        - if @facebook_friends.any?
+          .pushv3
+            %table.table.table-condensed
+              %thead
+                %tr
+                  %th{colspan: 3}
+                    Invite Facebook Friends
+                    = submit_tag "Send Invitations", class: "btn pull-right"
+              %tbody
+                - @facebook_friends.each do |user|
+                  %tr{id: user.raw_attributes[:id]}
+                    %td{style: "width: 30px !important; text-align: center" }
+                      = check_box_tag "ids[]", user.raw_attributes[:id]
+                    %td{style: "text-align: center" }= image_tag(user.picture(:square), class: "user-photo")
+                    %td.name= user.name
     - else
       There are not friend to invite

@@ -55,23 +55,29 @@
 
 
 .landing #page .intro{ background: url('/assets/map.png') center center; min-height: 330px;}
-.landing .social{ padding-top: 45px;}
+.landing .social{ padding-top: 45px; text-align: center; color:#333;}
+.landing .social h3{ font-size: 20px; color:#FFA659;}
 .landing .social .image{text-align: center; height: 90px; line-height: 90px;}
 
+.error body{background: #FFA759 url('/assets/map.png') no-repeat; -moz-background-size: auto 100%; -webkit-background-size: auto 100%; background-size: auto 100%;}
+.error .error404{background: url('/assets/404.png') no-repeat center center;min-height: 500px;}
+.error .error404 span{color:#FFF; position: absolute; left: 48%; top: 235px; font-size: 52px; font-weight: bold;}
+
 #page .steps{
-  color: #CCC;
   height: 149px;
   border-top: 1px solid #E2E2D9;
   border-bottom: 1px solid #E2E2D9;
-  background: #F3F2EF url('/assets/steps.png') no-repeat center 50px;
   text-align: center;
   font-size: 18px;
-  font-weight: bold;
 }
-#page .steps .span4{padding-top: 75px;}
-#page .steps span{font-size: 14px; display: block; margin-bottom: 7px; font-weight: normal;}
-#page .steps .current{color: #000;}
-#page .steps .current span{font-weight: bold;}
+#page .step1{ background: #FFA759 url('/assets/steps1.png') no-repeat center 50px;}
+#page .step2{ background: #FFA759 url('/assets/steps2.png') no-repeat center 50px;}
+#page .step3{ background: #FFA759 url('/assets/steps3.png') no-repeat center 50px;}
+#page .steps .span4{padding-top: 75px; opacity: 0.5; color: #000;}
+#page .steps span{font-size: 14px; display: block; margin-bottom: 7px; font-weight: normal;  }
+#page .steps .current{color: #000; opacity: 1;}
+#page .steps .current span{color: #FFF;}
+
 
 #page .find_friends table, #page .place table{
   border: 1px solid #DDD;

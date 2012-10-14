@@ -4,8 +4,9 @@ class PublicPagesController < ApplicationController
     @travels = @user.travels
   end
 
-  def travel_show
-    @user = User.find params[:user_id]    
+
+  def show_travel
+    @user = User.find params[:user_id]
     @travel = @user.travels.find params[:id]
   end
 end

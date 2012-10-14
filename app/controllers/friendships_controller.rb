@@ -1,4 +1,7 @@
 class FriendshipsController < ApplicationController
+  def index
+    @friends = current_user.all_friends
+  end
 
   def new
     @pending_requests = current_user.requested_friendships
@@ -16,9 +19,9 @@ class FriendshipsController < ApplicationController
   def update
     @friendship = Friendship.find(params[:id])
     if @friendship.update_attribute(:accepted,true)
-      flash[:notice] = "friendship created successfully"
+      flash[:notice] = "Friendship created successfully"
     else
-      flash[:notice] = "friendship cannot be accepted"
+      flash[:notice] = "Friendship cannot be accepted"
     end
     redirect_to :back
   end

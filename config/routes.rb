@@ -6,13 +6,15 @@ Travelmemories::Application.routes.draw do
   match "/get_checkins", to: "user_steps#get_checkins"
   match "/get_photos", to: "user_steps#get_photos"
 
-  
+  match "/users/:id/timeline", to: "public_pages#timeline", as: :timeline
+  match "/users/:user_id/travels/:id", to: "public_pages#show_travel", as: :show_travel
+
 
   resources :travels, on: :collection do
     resources :checkins
   end
 
-  resources :users, only: [:edit]
+  resources :users, only: [:edit, :update]
 
   resources :friendships do
     collection do

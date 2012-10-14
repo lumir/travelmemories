@@ -40,7 +40,15 @@
       = text_field_tag :start_date,"", class: "text span5 start_datepicker", placeholder: "Start date"
       = text_field_tag :end_date,"", class: "text span5 end_datepicker", placeholder: "End date"
       #checkins_container
-      #photos_container
+      %h3.clear.photos Add Photos
+      .row-fluid
+        .span12
+          - @photos.each do |album|
+            .span12= album.first
+            - album.second.each do |photo|
+              .span4
+                =image_tag photo, size: "100x100"
+                = check_box_tag "photos_urls[]", photo
 
   .modal-footer
     =submit_tag "Close", class: "btn close-modal"

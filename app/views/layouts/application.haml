@@ -20,15 +20,25 @@
                 %ul.nav.pull-right
                   %li
                     = link_to  new_friendship_path do
-                      %span.badge= current_user.pending_friends_inverse.count
+                      %span.badge.badge-warning= current_user.pending_friends_inverse.count
                       Friendships
-
+                  %li= link_to "Edit Profile", edit_user_path(current_user)
                   %li.divider-vertical
-                  %li= link_to "Salir", destroy_user_session_path, method: :delete
+                  %li= link_to "Log Out", destroy_user_session_path, method: :delete
               - else
                 %p.navbar-text.pull-right
-    #page
-      = render partial: "shared/flash"
-      = yield
+    .container-fluid
+      .row-fluid
+        .flash_notices
+          =render :partial => "shared/flash", :locals => {:flash => flash}
+        = yield
+
 
   = yield :javascript
+  :javascript
+    var rumbleBannerBackgroundColor, rumbleBannerTextColor, rumbleBannerLinkColor, rumbleBannerPlacement;
+    rumbleBannerBackgroundColor = "#161616";
+    rumbleBannerTextColor = "#b0b0b0";
+    rumbleBannerLinkColor = "#ffffff";
+    rumbleBannerPlacement = "bottom";
+  = javascript_include_tag "http://s0.railsrumble.com/banner.js"
