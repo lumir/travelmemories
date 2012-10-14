@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
     unless auth["provider"] == "facebook"
       user = find_or_create_by_email(auth["info"]["email"]) do |user|
         user.first_name = auth["info"]["first_name"]
-        user.last_name = auth["info"]["last_name"]        
+        user.last_name = auth["info"]["last_name"]
         user.image_url = auth["info"]["image"]
         user.password = Devise.friendly_token[0,20]
       end

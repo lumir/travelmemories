@@ -20,7 +20,7 @@
                 %ul.nav.pull-right
                   %li
                     = link_to  new_friendship_path do
-                      %span.badge= current_user.pending_friends_inverse.count
+                      %span.badge.badge-warning= current_user.pending_friends_inverse.count
                       Friendships
                   %li= link_to "Edit Profile", edit_user_path(current_user)
                   %li.divider-vertical
