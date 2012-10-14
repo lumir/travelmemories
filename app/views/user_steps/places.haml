@@ -74,9 +74,12 @@
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date },
           success: function(response){
-            console.log(JSON.parse(response))
-            var data = ich.checkins_template({data: JSON.parse(response)});
-            $("#checkins_container").html(data);
+            if(response != "[]"){
+              var data = ich.checkins_template({data: JSON.parse(response)});
+              $("#checkins_container").html(data);
+            }else{
+              $("#checkins_container").html("");
+            }               
           }
         });
       }
@@ -93,8 +96,12 @@
           url: "/get_checkins",
           data: { location: location, start_date: start_date, end_date: end_date },
           success: function(response){
-            var data = ich.checkins_template({data: JSON.parse(response)});
-            $("#checkins_container").html(data);
+            if(response != "[]"){
+              var data = ich.checkins_template({data: JSON.parse(response)});
+              $("#checkins_container").html(data);
+            }else{
+              $("#checkins_container").html("");
+            }               
           }
         });
       }
