@@ -17,7 +17,7 @@
                       %td.name{id: user.id}= user.first_name
                       = f.hidden_field :friend_id, value: user.id
                       = f.hidden_field :accepted, value: false
-                      %td= f.submit "Add", class: "btn pull-right pushv2"
+                      %td= f.submit "Add friend", class: "btn pull-right pushv2"
 
         = form_tag invite_friendships_path do
           - if @facebook_friends.any?

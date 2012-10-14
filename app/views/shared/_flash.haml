@@ -1,9 +1,3 @@
-- unless flash.blank?
-  .container.flash
-    .row
-      .flash_notices
-        - flash.each do |key, msg|
-          %div{:id => key, :class => "flash #{key}"}
-            %span.icon
-            %p.message
-              = msg unless msg.is_a?(Array)
+- flash.each do |type, message|
+  %div.alert-message.fade.in.alert{ "data-alert" => "alert", :class => twitterized_type(type) }
+    = message
