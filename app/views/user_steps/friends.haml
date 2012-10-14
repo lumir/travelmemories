@@ -16,28 +16,24 @@
                     %td= image_tag(user.picture(:square), class: "user-photo")
                     %td.name= user.name
                     %td add
+        = form_tag invite_friendships_path do
+          - if @facebook_friends.any?
+            .pushv3
+              %table.table.table-condensed
+                %thead
+                  %tr{colspan: 3}
+                    %th Invite Facebook Friends
+                %tbody
+                  - @facebook_friends.each do |user|
+                    %tr{id: user.raw_attributes[:id]}
+                      %td
+                        = check_box_tag "ids[]", user.raw_attributes[:id]
+                      %td= image_tag(user.picture(:square), class: "user-photo")
+                      %td.name= user.name
 
-        - unless @facebook_friends.empty?
-          .pushv3
-            %table.table.table-condensed
-              %thead
-                %tr{colspan: 3}
-                  %th Invite Facebook Friends
-              %tbody
-                - @facebook_friends.each do |user|
-                  %tr
-                    %td checkbox
-                    %td= image_tag(user.picture(:square), class: "user-photo")
-                    %td.name= user.name
+            .buttons.pushv2
+              = submit_tag "Send Invitations", class: "btn pull-right"
 
-        - else
-          There are not friend to invite
-
-        .buttons.pushv2
-          - unless @facebook_friends.empty?
-            %button.btn.pull-right Send Invitations
-          = form_for @user, url: wizard_path, class: "form-inline" do |f|
-            = f.submit "Next", class: "btn pull-left"
 
 
 = content_for :javascript do

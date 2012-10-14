@@ -76,6 +76,14 @@ class User < ActiveRecord::Base
     user
   end
 
+  def wall_post(fb_id)
+    graph = Koala::Facebook::API.new(has_authenticated?("facebook").token)
+    begin
+      graph.put_wall_post("Lorem", {:name => "Travel Memories", :link => "http://railstars.r12.railsrumble.com/"}, fb_id)
+    rescue
+    end
+  end
+
   def get_friendship(user)
     result = Friendship.where("(user_id = #{user.id} AND friend_id = #{self.id}) OR (user_id = #{self.id} AND friend_id = #{user.id})")
     result.first
@@ -108,9 +116,11 @@ class User < ActiveRecord::Base
   end
 
   def friends_in_facebook
-    auth = self.authentications.find_by_provider("facebook")
-    user = FbGraph::User.me("#{auth.token}")
-    user.friends
+    Rails.cache.fetch(:friends_in_facebook, expires: 1.hour) do
+      auth = self.authentications.find_by_provider("facebook")
+      user = FbGraph::User.me("#{auth.token}")
+      user.friends
+    end
   end
 
   def has_authenticated?(provider)
