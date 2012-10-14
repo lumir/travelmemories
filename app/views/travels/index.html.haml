@@ -1,14 +1,15 @@
-= link_to "Create New Travel","#", class: "open-modal", :"data-toggle" => "modal"
+.container.find_friends
+  .row
+    = link_to "Create New Travel","#", class: "open-modal", :"data-toggle" => "modal"
 
-my Timeline
+    my Timeline
 
-- @travels.each do |travel|
-  %h3
-    = travel.location
-  %h4
-    = travel.start_date
-  %h4
-    = travel.end_date
+    - @travels.each do |travel|
+      %h3= link_to travel.location, travel_path(travel)
+      %h4
+        = travel.start_date
+      %h4
+        = travel.end_date
 
 .modal.hide.fade#mymodal.place{:role => "dialog", :"aria-labelledby" => "myModalLabel", :"aria-hidden" => "true"}
   .modal-body

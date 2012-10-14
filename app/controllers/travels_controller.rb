@@ -4,6 +4,10 @@ class TravelsController < ApplicationController
     @travels = current_user.travels
   end
 
+  def show
+    @travel = current_user.travels.find(params[:id])
+  end
+
   def create
     @travel = Travel.new(name: params[:location], location: params[:location], start_date: params[:start_date], end_date: params[:end_date], user_id: current_user.id)
     if @travel.save
