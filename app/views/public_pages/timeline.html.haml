@@ -1,14 +1,40 @@
 .container.find_friends
-  .row
-    my Timeline
+  .pushv4
+    .floatcenter.width400
+      .media.clearfix.pullv4
+        .img.portrait
+          =image_tag(@user.image_url)
+        .body.pushv2
+          %h3
+            = @user.first_name
 
-    - @travels.each do |travel|
-      %h3= travel.location
 
-      %h4
-        = travel.start_date
-      %h4
-        = travel.end_date
-      - unless travel.photos.empty?
-        =image_tag(travel.photos.shuffle.first.url)
-
+    .timeline-container.clearfix
+      %ul.travel-timeline.clear
+        - @travels.each do |travel|
+          %li.timeline-item.clearfix
+            .travel-pic
+              -unless travel.photos.empty?
+                =image_tag(travel.photos.shuffle.first.url)
+            .travel-body
+              .travel-date
+                = travel.start_date
+                = if travel.end_date?
+                  %span -
+                  = travel.end_date
+              %div
+                %h3.travel-location
+                  = link_to travel.location, show_travel_path(@user,travel), :class => "hover-black"
+              %ul.travel-info
+                %li
+                  %span.travel-type
+                    Travel by
+                    = travel.try(:transportation)
+                %li
+                  %a.orange{:href => ""}
+                    %i.icon-map-marker
+                    3 Check-ins
+                %li
+                  %a.orange{:href => ""}
+                    %i.icon-picture
+                    40 Photos
