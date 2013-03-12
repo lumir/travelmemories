@@ -308,3 +308,6 @@ a.hover-white:hover{color:#FFF !important;}
 
 .valign{vertical-align:middle !Important;}
 
+.place_picture{
+  max-height: 80%;
+}

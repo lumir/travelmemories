@@ -16,8 +16,9 @@ gem "fb_graph", "2.5.3"
 gem "wicked", "0.2.0"
 gem "aasm", "3.0.5"
 gem "foursquare2"
-gem "dalli"
 gem "koala", "1.5.0"
+gem "heroku"
+gem "paperclip"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -43,7 +44,6 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano', '2.13.4'
 
 # To use debugger
 # gem 'debugger'
