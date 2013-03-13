@@ -26,7 +26,7 @@
             .travel-body
               .travel-date
                 = travel.start_date
-                = if travel.end_date?
+                - if travel.end_date?
                   %span -
                   = travel.end_date
               %div
